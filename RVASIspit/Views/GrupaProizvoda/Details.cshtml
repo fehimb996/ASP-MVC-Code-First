@@ -1,0 +1,25 @@
+﻿@model RVASIspit.Models.GrupaProizvoda
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Grupa Proizvoda</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.NazivGrupe)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.NazivGrupe)
+        </dd>
+    </dl>
+</div>
+
+<div>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.GrupaProizvodaID }) |
+    @Html.ActionLink("Back to List", "Index")
+</div>
