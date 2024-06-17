@@ -170,8 +170,10 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\KlijentController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\ProizvodController.cs" />
+    <Compile Include="Controllers\ZaposleniController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -268,10 +270,24 @@
     <Content Include="Views\Manage\VerifyPhoneNumber.cshtml" />
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
+    <Content Include="Views\Proizvod\Proizvodi.cshtml" />
+    <Content Include="Views\Proizvod\Create.cshtml" />
+    <Content Include="Views\Proizvod\Edit.cshtml" />
+    <Content Include="Views\Proizvod\Delete.cshtml" />
+    <Content Include="Views\Proizvod\Details.cshtml" />
+    <Content Include="Views\Klijent\Klijenti.cshtml" />
+    <Content Include="Views\Klijent\Create.cshtml" />
+    <Content Include="Views\Klijent\Edit.cshtml" />
+    <Content Include="Views\Klijent\Delete.cshtml" />
+    <Content Include="Views\Klijent\Details.cshtml" />
+    <Content Include="Views\Zaposleni\Zaposleni.cshtml" />
+    <Content Include="Views\Zaposleni\Create.cshtml" />
+    <Content Include="Views\Zaposleni\Edit.cshtml" />
+    <Content Include="Views\Zaposleni\Delete.cshtml" />
+    <Content Include="Views\Zaposleni\Details.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\Proizvod\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap.rtl.min.css.map" />

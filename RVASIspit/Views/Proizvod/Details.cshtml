@@ -1,0 +1,49 @@
+﻿@model RVASIspit.Models.Proizvod
+
+@{
+    ViewBag.Title = "Proizvod Detalji";
+}
+
+<h2>Detalji</h2>
+
+<div>
+    <h4>Proizvod</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Naziv)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Naziv)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Cena)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Cena)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.GrupaProizvoda.NazivGrupe)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.GrupaProizvoda.NazivGrupe)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.VrstaProizvoda.NazivVrste)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.VrstaProizvoda.NazivVrste)
+        </dd>
+    </dl>
+</div>
+<div>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.ProizvodID }) |
+    @Html.ActionLink("Back to List", "Index")
+</div>
