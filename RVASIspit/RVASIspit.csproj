@@ -175,6 +175,7 @@
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\ProizvodController.cs" />
     <Compile Include="Controllers\ProizvodSastojakController.cs" />
+    <Compile Include="Controllers\RacunController.cs" />
     <Compile Include="Controllers\SastojakController.cs" />
     <Compile Include="Controllers\VrstaProizvodaController.cs" />
     <Compile Include="Controllers\ZaposleniController.cs" />
@@ -305,6 +306,15 @@
     <Content Include="Views\Sastojak\Details.cshtml" />
     <Content Include="Views\Sastojak\Delete.cshtml" />
     <Content Include="Views\ProizvodSastojak\SastojciProizvoda.cshtml" />
+    <Content Include="Views\ProizvodSastojak\Create.cshtml" />
+    <Content Include="Views\ProizvodSastojak\Edit.cshtml" />
+    <Content Include="Views\ProizvodSastojak\Details.cshtml" />
+    <Content Include="Views\ProizvodSastojak\Delete.cshtml" />
+    <Content Include="Views\Racun\Racuni.cshtml" />
+    <Content Include="Views\Racun\Create.cshtml" />
+    <Content Include="Views\Racun\Edit.cshtml" />
+    <Content Include="Views\Racun\Details.cshtml" />
+    <Content Include="Views\Racun\Delete.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

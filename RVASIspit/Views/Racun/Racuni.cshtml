@@ -1,0 +1,52 @@
+﻿@model IEnumerable<RVASIspit.Models.Racun>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Klijent.Ime)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Zaposleni.Ime)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DatumIzdavanja)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.UkupnaCena)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Klijent.Ime)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Zaposleni.Ime)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DatumIzdavanja)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.UkupnaCena)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.RacunID }) |
+                @Html.ActionLink("Details", "Details", new { id = item.RacunID }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.RacunID })
+            </td>
+        </tr>
+    }
+
+</table>

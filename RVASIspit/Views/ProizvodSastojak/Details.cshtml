@@ -1,0 +1,31 @@
+﻿@model RVASIspit.Models.ProizvodSastojak
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>ProizvodSastojak</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Proizvod.Naziv)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Proizvod.Naziv)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Sastojak.NazivSastojka)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Sastojak.NazivSastojka)
+        </dd>
+    </dl>
+</div>
+
+<p>
+    @Html.ActionLink("Edit", "Edit", new { proizvodId = Model.ProizvodID, sastojakId = Model.SastojakID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

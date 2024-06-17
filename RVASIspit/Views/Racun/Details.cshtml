@@ -1,0 +1,43 @@
+﻿@model RVASIspit.Models.Racun
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Racun</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Klijent.Ime)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Klijent.Ime)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Zaposleni.Ime)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Zaposleni.Ime)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.DatumIzdavanja)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.DatumIzdavanja)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.UkupnaCena)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.UkupnaCena)
+        </dd>
+    </dl>
+</div>
+
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.RacunID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
