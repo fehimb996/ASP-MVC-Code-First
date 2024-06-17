@@ -1,0 +1,40 @@
+﻿@model IEnumerable<RVASIspit.Models.ProizvodSastojak>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Proizvod.Naziv)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Sastojak.NazivSastojka)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Proizvod.Naziv)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Sastojak.NazivSastojka)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { proizvodId = item.ProizvodID, sastojakId = item.SastojakID }) |
+                @Html.ActionLink("Details", "Details", new { proizvodId = item.ProizvodID, sastojakId = item.SastojakID }) |
+                @Html.ActionLink("Delete", "Delete", new { proizvodId = item.ProizvodID, sastojakId = item.SastojakID })
+            </td>
+        </tr>
+    }
+
+</table>

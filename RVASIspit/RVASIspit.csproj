@@ -174,6 +174,9 @@
     <Compile Include="Controllers\KlijentController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\ProizvodController.cs" />
+    <Compile Include="Controllers\ProizvodSastojakController.cs" />
+    <Compile Include="Controllers\SastojakController.cs" />
+    <Compile Include="Controllers\VrstaProizvodaController.cs" />
     <Compile Include="Controllers\ZaposleniController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -291,6 +294,17 @@
     <Content Include="Views\GrupaProizvoda\Edit.cshtml" />
     <Content Include="Views\GrupaProizvoda\Delete.cshtml" />
     <Content Include="Views\GrupaProizvoda\Details.cshtml" />
+    <Content Include="Views\VrstaProizvoda\VrsteProizvoda.cshtml" />
+    <Content Include="Views\VrstaProizvoda\Create.cshtml" />
+    <Content Include="Views\VrstaProizvoda\Edit.cshtml" />
+    <Content Include="Views\VrstaProizvoda\Delete.cshtml" />
+    <Content Include="Views\VrstaProizvoda\Details.cshtml" />
+    <Content Include="Views\Sastojak\Sastojci.cshtml" />
+    <Content Include="Views\Sastojak\Create.cshtml" />
+    <Content Include="Views\Sastojak\Edit.cshtml" />
+    <Content Include="Views\Sastojak\Details.cshtml" />
+    <Content Include="Views\Sastojak\Delete.cshtml" />
+    <Content Include="Views\ProizvodSastojak\SastojciProizvoda.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
