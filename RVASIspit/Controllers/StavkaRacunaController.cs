@@ -14,7 +14,7 @@ namespace RVASIspit.Controllers
         private CodeFirstBaza db = new CodeFirstBaza();
 
         // GET: StavkeRacuna
-        public ActionResult StavkeRacuna()
+        public ActionResult Index()
         {
             var stavkeRacuna = db.StavkeRacuna.Include(s => s.Proizvod).Include(s => s.Racun);
             return View(stavkeRacuna.ToList());

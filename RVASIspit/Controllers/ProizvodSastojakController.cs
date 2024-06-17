@@ -13,7 +13,7 @@ namespace RVASIspit.Controllers
         private CodeFirstBaza db = new CodeFirstBaza();
 
         // GET: ProizvodSastojak
-        public ActionResult SastojciProizvoda()
+        public ActionResult Index()
         {
             var proizvodSastojci = db.SastojciProizvoda
                             .Include("Proizvod")

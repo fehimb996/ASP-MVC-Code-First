@@ -14,7 +14,7 @@ namespace RVASIspit.Controllers
         private CodeFirstBaza db = new CodeFirstBaza();
 
         // GET: Klijenti
-        public ActionResult Klijenti()
+        public ActionResult Index()
         {
             return View(db.Klijenti.ToList());
         }

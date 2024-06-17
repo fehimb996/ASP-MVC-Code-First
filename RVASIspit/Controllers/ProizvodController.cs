@@ -15,7 +15,7 @@ namespace RVASIspit.Controllers
         private CodeFirstBaza db = new CodeFirstBaza();
 
         // GET: Proizvodi
-        public async Task<ActionResult> Proizvodi()
+        public async Task<ActionResult> Index()
         {
             var proizvodi = db.Proizvodi.Include(p => p.GrupaProizvoda).Include(p => p.VrstaProizvoda);
             return View(await proizvodi.ToListAsync());
