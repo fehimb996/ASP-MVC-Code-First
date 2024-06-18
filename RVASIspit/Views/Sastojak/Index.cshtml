@@ -9,26 +9,45 @@
 <p>
     @Html.ActionLink("Create New", "Create")
 </p>
-<table class="table table-hover table-bordered table-responsive text-center">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.NazivSastojka)
-        </th>
-        <th></th>
-    </tr>
 
-    @foreach (var item in Model)
-    {
+<table id="sastojciTable" class="table table-hover table-bordered table-responsive text-center">
+    <thead>
         <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.NazivSastojka)
-            </td>
-            <td>
-                @Html.ActionLink("Edit", "Edit", new { id = item.SastojakID }) |
-                @Html.ActionLink("Details", "Details", new { id = item.SastojakID }) |
-                @Html.ActionLink("Delete", "Delete", new { id = item.SastojakID })
-            </td>
+            <th>
+                @Html.DisplayNameFor(model => model.NazivSastojka)
+            </th>
+            <th></th>
         </tr>
-    }
-
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.NazivSastojka)
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { id = item.SastojakID }) |
+                    @Html.ActionLink("Details", "Details", new { id = item.SastojakID }) |
+                    @Html.ActionLink("Delete", "Delete", new { id = item.SastojakID })
+                </td>
+            </tr>
+        }
+    </tbody>
 </table>
+
+@section scripts {
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <!-- DataTables JavaScript -->
+    <script src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js"></script>
+    <script>$(document).ready(function() {
+            $('#sastojciTable').DataTable({
+                "pagingType": "full_numbers",
+                "lengthMenu": [5, 10, 25, 50, 75, 100],
+                "pageLength": 10,
+                "ordering": true,
+                "searching": true
+            });
+        });</script>
+}

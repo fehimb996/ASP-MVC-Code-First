@@ -7,40 +7,61 @@
 <h2>Klijenti</h2>
 
 <p>
-    @Html.ActionLink("Create New", "Create")
+    @Html.ActionLink("Dodaj klijenta", "Create")
 </p>
-<table class="table table-hover table-bordered table-responsive text-center">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.Ime)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Prezime)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Telefon)
-        </th>
-        <th></th>
-    </tr>
 
-    @foreach (var item in Model)
-    {
+<table id="klijentiTable" class="table table-hover table-bordered table-responsive text-center">
+    <thead>
         <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Ime)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Prezime)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Telefon)
-            </td>
-            <td>
-                @Html.ActionLink("Edit", "Edit", new { id = item.KlijentID }) |
-                @Html.ActionLink("Details", "Details", new { id = item.KlijentID }) |
-                @Html.ActionLink("Delete", "Delete", new { id = item.KlijentID })
-            </td>
+            <th>
+                @Html.DisplayNameFor(model => model.Ime)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Prezime)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Telefon)
+            </th>
+            <th></th>
         </tr>
-    }
-
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Ime)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Prezime)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Telefon)
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { id = item.KlijentID }) |
+                    @Html.ActionLink("Details", "Details", new { id = item.KlijentID }) |
+                    @Html.ActionLink("Delete", "Delete", new { id = item.KlijentID })
+                </td>
+            </tr>
+        }
+    </tbody>
 </table>
+
+@section scripts {
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <!-- DataTables JavaScript -->
+    <script src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('#klijentiTable').DataTable({
+                "pagingType": "full_numbers",
+                "lengthMenu": [5, 10, 25, 50, 75, 100],
+                "pageLength": 10,
+                "ordering": true,
+                "searching": true
+            });
+        });
+    </script>
+}
