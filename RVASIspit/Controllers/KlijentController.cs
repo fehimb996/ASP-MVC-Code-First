@@ -13,13 +13,16 @@ namespace RVASIspit.Controllers
     {
         private CodeFirstBaza db = new CodeFirstBaza();
 
-        // GET: Klijenti
+        protected override void Dispose(bool disposing)
+        {
+            db.Dispose();
+        }
+
         public ActionResult Index()
         {
             return View(db.Klijenti.ToList());
         }
 
-        // GET: Klijent/Details/5
         public ActionResult Details(int? id)
         {
             if (id == null)
@@ -34,16 +37,14 @@ namespace RVASIspit.Controllers
             return View(klijent);
         }
 
-        // GET: Klijent/Create
         public ActionResult Create()
         {
             return View();
         }
 
-        // POST: Klijent/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "KlijentID,Ime,Prezime,Telefon")] Klijent klijent)
+        public ActionResult Create([Bind(Include = "KlijentID, Ime, Prezime, Telefon")] Klijent klijent)
         {
             if (ModelState.IsValid)
             {
@@ -55,7 +56,6 @@ namespace RVASIspit.Controllers
             return View(klijent);
         }
 
-        // GET: Klijent/Edit/5
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -70,7 +70,6 @@ namespace RVASIspit.Controllers
             return View(klijent);
         }
 
-        // POST: Klijent/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "KlijentID,Ime,Prezime,Telefon")] Klijent klijent)
@@ -84,7 +83,6 @@ namespace RVASIspit.Controllers
             return View(klijent);
         }
 
-        // GET: Klijent/Delete/5
         public ActionResult Delete(int? id)
         {
             if (id == null)
@@ -99,7 +97,6 @@ namespace RVASIspit.Controllers
             return View(klijent);
         }
 
-        // POST: Klijent/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
@@ -108,15 +105,6 @@ namespace RVASIspit.Controllers
             db.Klijenti.Remove(klijent);
             db.SaveChanges();
             return RedirectToAction("Index");
-        }
-
-        protected override void Dispose(bool disposing)
-        {
-            if (disposing)
-            {
-                db.Dispose();
-            }
-            base.Dispose(disposing);
         }
     }
 }

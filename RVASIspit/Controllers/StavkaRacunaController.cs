@@ -13,14 +13,17 @@ namespace RVASIspit.Controllers
     {
         private CodeFirstBaza db = new CodeFirstBaza();
 
-        // GET: StavkeRacuna
+        protected override void Dispose(bool disposing)
+        {
+            db.Dispose();
+        }
+
         public ActionResult Index()
         {
             var stavkeRacuna = db.StavkeRacuna.Include(s => s.Proizvod).Include(s => s.Racun);
             return View(stavkeRacuna.ToList());
         }
 
-        // GET: StavkaRacuna/Details/5
         public ActionResult Details(int? id)
         {
             if (id == null)
@@ -35,7 +38,6 @@ namespace RVASIspit.Controllers
             return View(stavkaRacuna);
         }
 
-        // GET: StavkaRacuna/Create
         public ActionResult Create()
         {
             ViewBag.ProizvodID = new SelectList(db.Proizvodi, "ProizvodID", "Naziv");
@@ -43,7 +45,6 @@ namespace RVASIspit.Controllers
             return View();
         }
 
-        // POST: StavkaRacuna/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "StavkaRacunaID,RacunID,ProizvodID,Cena")] StavkaRacuna stavkaRacuna)
@@ -60,7 +61,6 @@ namespace RVASIspit.Controllers
             return View(stavkaRacuna);
         }
 
-        // GET: StavkaRacuna/Edit/5
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -77,7 +77,6 @@ namespace RVASIspit.Controllers
             return View(stavkaRacuna);
         }
 
-        // POST: StavkaRacuna/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "StavkaRacunaID,RacunID,ProizvodID,Cena")] StavkaRacuna stavkaRacuna)
@@ -93,7 +92,6 @@ namespace RVASIspit.Controllers
             return View(stavkaRacuna);
         }
 
-        // GET: StavkaRacuna/Delete/5
         public ActionResult Delete(int? id)
         {
             if (id == null)
@@ -108,7 +106,6 @@ namespace RVASIspit.Controllers
             return View(stavkaRacuna);
         }
 
-        // POST: StavkaRacuna/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
@@ -117,15 +114,6 @@ namespace RVASIspit.Controllers
             db.StavkeRacuna.Remove(stavkaRacuna);
             db.SaveChanges();
             return RedirectToAction("Index");
-        }
-
-        protected override void Dispose(bool disposing)
-        {
-            if (disposing)
-            {
-                db.Dispose();
-            }
-            base.Dispose(disposing);
         }
     }
 }

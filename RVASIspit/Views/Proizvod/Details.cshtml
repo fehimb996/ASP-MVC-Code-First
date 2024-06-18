@@ -13,7 +13,6 @@
         <dt>
             @Html.DisplayNameFor(model => model.Naziv)
         </dt>
-
         <dd>
             @Html.DisplayFor(model => model.Naziv)
         </dd>
@@ -21,29 +20,31 @@
         <dt>
             @Html.DisplayNameFor(model => model.Cena)
         </dt>
-
         <dd>
             @Html.DisplayFor(model => model.Cena)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.GrupaProizvoda.NazivGrupe)
+            Grupa Proizvoda
         </dt>
-
         <dd>
             @Html.DisplayFor(model => model.GrupaProizvoda.NazivGrupe)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.VrstaProizvoda.NazivVrste)
+            Vrsta Proizvoda
         </dt>
-
         <dd>
             @Html.DisplayFor(model => model.VrstaProizvoda.NazivVrste)
         </dd>
     </dl>
 </div>
+
 <div>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.ProizvodID }) |
-    @Html.ActionLink("Back to List", "Index")
+    @if (User.IsInRole("Admin"))
+    {
+        @Html.ActionLink("Edit", "Edit", new { id = Model.ProizvodID }, new { @class = "btn btn-warning" }) <text> | </text>
+    }
+
+    @Html.ActionLink("Back to List", "Index", null, new { @class = "btn btn-primary" })
 </div>

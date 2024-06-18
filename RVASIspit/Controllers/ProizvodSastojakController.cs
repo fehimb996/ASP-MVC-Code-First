@@ -12,7 +12,11 @@ namespace RVASIspit.Controllers
     {
         private CodeFirstBaza db = new CodeFirstBaza();
 
-        // GET: ProizvodSastojak
+        protected override void Dispose(bool disposing)
+        {
+            db.Dispose();
+        }
+
         public ActionResult Index()
         {
             var proizvodSastojci = db.SastojciProizvoda
@@ -22,7 +26,6 @@ namespace RVASIspit.Controllers
             return View(proizvodSastojci);
         }
 
-        // GET: ProizvodSastojak/Details/5
         public ActionResult Details(int? proizvodId, int? sastojakId)
         {
             if (proizvodId == null || sastojakId == null)
@@ -37,7 +40,6 @@ namespace RVASIspit.Controllers
             return View(proizvodSastojak);
         }
 
-        // GET: ProizvodSastojak/Create
         public ActionResult Create()
         {
             ViewBag.ProizvodID = new SelectList(db.Proizvodi, "ProizvodID", "Naziv");
@@ -45,7 +47,6 @@ namespace RVASIspit.Controllers
             return View();
         }
 
-        // POST: ProizvodSastojak/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "ProizvodID,SastojakID")] ProizvodSastojak proizvodSastojak)
@@ -62,7 +63,6 @@ namespace RVASIspit.Controllers
             return View(proizvodSastojak);
         }
 
-        // GET: ProizvodSastojak/Delete/5
         public ActionResult Delete(int? proizvodId, int? sastojakId)
         {
             if (proizvodId == null || sastojakId == null)
@@ -77,7 +77,6 @@ namespace RVASIspit.Controllers
             return View(proizvodSastojak);
         }
 
-        // POST: ProizvodSastojak/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int proizvodId, int sastojakId)
@@ -86,15 +85,6 @@ namespace RVASIspit.Controllers
             db.SastojciProizvoda.Remove(proizvodSastojak);
             db.SaveChanges();
             return RedirectToAction("Index");
-        }
-
-        protected override void Dispose(bool disposing)
-        {
-            if (disposing)
-            {
-                db.Dispose();
-            }
-            base.Dispose(disposing);
         }
     }
 }

@@ -24,7 +24,6 @@ namespace RVASIspit.Controllers
             db.Dispose();
         }
 
-        // GET: Proizvodi
         public ActionResult Index(string sortOrder, string currentFilter, string searchString, int? grupaProizvodaId, int? vrstaProizvodaId, int? page)
         {
             ViewBag.CurrentSort = sortOrder;
@@ -78,16 +77,13 @@ namespace RVASIspit.Controllers
             return View(proizvodi.ToPagedList(pageNumber, pageSize));
         }
 
-
-
-        // GET: Proizvod/Details/5
         public async Task<ActionResult> Details(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Proizvod proizvod = await db.Proizvodi.FindAsync(id);
+            Proizvod proizvod = await db.Proizvodi.Include(p => p.GrupaProizvoda).Include(p => p.VrstaProizvoda).FirstOrDefaultAsync(p => p.ProizvodID == id);
             if (proizvod == null)
             {
                 return HttpNotFound();
@@ -95,7 +91,8 @@ namespace RVASIspit.Controllers
             return View(proizvod);
         }
 
-        // GET: Proizvod/Create
+
+        [Authorize(Roles = "Admin")]
         public ActionResult Create()
         {
             ViewBag.GrupaProizvodaID = new SelectList(db.GrupeProizvoda, "GrupaProizvodaID", "NazivGrupe");
@@ -103,8 +100,8 @@ namespace RVASIspit.Controllers
             return View();
         }
 
-        // POST: Proizvod/Create
         [HttpPost]
+        [Authorize(Roles = "Admin")]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Create([Bind(Include = "ProizvodID,Naziv,Cena,GrupaProizvodaID,VrstaProizvodaID")] Proizvod proizvod)
         {
@@ -120,7 +117,7 @@ namespace RVASIspit.Controllers
             return View(proizvod);
         }
 
-        // GET: Proizvod/Edit/5
+        [Authorize(Roles = "Admin")]
         public async Task<ActionResult> Edit(int? id)
         {
             if (id == null)
@@ -137,8 +134,8 @@ namespace RVASIspit.Controllers
             return View(proizvod);
         }
 
-        // POST: Proizvod/Edit/5
         [HttpPost]
+        [Authorize(Roles = "Admin")]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Edit([Bind(Include = "ProizvodID,Naziv,Cena,GrupaProizvodaID,VrstaProizvodaID")] Proizvod proizvod)
         {
@@ -153,7 +150,7 @@ namespace RVASIspit.Controllers
             return View(proizvod);
         }
 
-        // GET: Proizvod/Delete/5
+        [Authorize(Roles = "Admin")]
         public async Task<ActionResult> Delete(int? id)
         {
             if (id == null)
@@ -168,8 +165,8 @@ namespace RVASIspit.Controllers
             return View(proizvod);
         }
 
-        // POST: Proizvod/Delete/5
         [HttpPost, ActionName("Delete")]
+        [Authorize(Roles = "Admin")]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> DeleteConfirmed(int id)
         {

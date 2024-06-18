@@ -13,14 +13,17 @@ namespace RVASIspit.Controllers
     {
         private CodeFirstBaza db = new CodeFirstBaza();
 
-        // GET: Racuni
+        protected override void Dispose(bool disposing)
+        {
+            db.Dispose();
+        }
+
         public ActionResult Index()
         {
             var racuni = db.Racuni.Include(r => r.Klijent).Include(r => r.Zaposleni);
             return View(racuni.ToList());
         }
 
-        // GET: Racun/Details/5
         public ActionResult Details(int? id)
         {
             if (id == null)
@@ -35,7 +38,6 @@ namespace RVASIspit.Controllers
             return View(racun);
         }
 
-        // GET: Racun/Create
         public ActionResult Create()
         {
             ViewBag.KlijentID = new SelectList(db.Klijenti, "KlijentID", "Ime");
@@ -43,14 +45,13 @@ namespace RVASIspit.Controllers
             return View();
         }
 
-        // POST: Racun/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "RacunID,KlijentID,ZaposleniID,DatumIzdavanja,UkupnaCena")] Racun racun)
         {
             if (ModelState.IsValid)
             {
-                racun.DatumIzdavanja = DateTime.Now; // Postavljanje trenutnog vremena kao datuma izdavanja
+                racun.DatumIzdavanja = DateTime.Now;
                 db.Racuni.Add(racun);
                 db.SaveChanges();
                 return RedirectToAction("Index");
@@ -61,7 +62,6 @@ namespace RVASIspit.Controllers
             return View(racun);
         }
 
-        // GET: Racun/Edit/5
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -78,7 +78,6 @@ namespace RVASIspit.Controllers
             return View(racun);
         }
 
-        // POST: Racun/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "RacunID,KlijentID,ZaposleniID,DatumIzdavanja,UkupnaCena")] Racun racun)
@@ -94,7 +93,6 @@ namespace RVASIspit.Controllers
             return View(racun);
         }
 
-        // GET: Racun/Delete/5
         public ActionResult Delete(int? id)
         {
             if (id == null)
@@ -109,7 +107,6 @@ namespace RVASIspit.Controllers
             return View(racun);
         }
 
-        // POST: Racun/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
@@ -118,15 +115,6 @@ namespace RVASIspit.Controllers
             db.Racuni.Remove(racun);
             db.SaveChanges();
             return RedirectToAction("Index");
-        }
-
-        protected override void Dispose(bool disposing)
-        {
-            if (disposing)
-            {
-                db.Dispose();
-            }
-            base.Dispose(disposing);
         }
     }
 }

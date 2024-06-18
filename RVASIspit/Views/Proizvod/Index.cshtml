@@ -27,9 +27,12 @@
     }
 </div>
 
-<p class="text-center pt-2">
-    @Html.ActionLink("Dodaj novi proizvod", "Create", null, new { @class = "btn btn-primary" })
-</p>
+@if (User.IsInRole("Admin"))
+{
+    <p class="text-center pt-2">
+        @Html.ActionLink("Dodaj novi proizvod", "Create", null, new { @class = "btn btn-primary" })
+    </p>
+}
 
 @if (!Model.Any())
 {
@@ -72,9 +75,14 @@ else
                         @Html.DisplayFor(modelItem => item.VrstaProizvoda.NazivVrste)
                     </td>
                     <td>
-                        @Html.ActionLink("Edit", "Edit", new { id = item.ProizvodID }) |
-                        @Html.ActionLink("Details", "Details", new { id = item.ProizvodID }) |
-                        @Html.ActionLink("Delete", "Delete", new { id = item.ProizvodID })
+                        @Html.ActionLink("Details", "Details", new { id = item.ProizvodID })
+                        @if (User.IsInRole("Admin"))
+                        {
+                            <text> | </text>
+                            @Html.ActionLink("Edit", "Edit", new { id = item.ProizvodID })
+                            <text> | </text>
+                            @Html.ActionLink("Delete", "Delete", new { id = item.ProizvodID })
+                        }
                     </td>
                 </tr>
             }

@@ -13,13 +13,16 @@ namespace RVASIspit.Controllers
     {
         private CodeFirstBaza db = new CodeFirstBaza();
 
-        // GET: GrupeProizvoda
+        protected override void Dispose(bool disposing)
+        {
+            db.Dispose();
+        }
+
         public ActionResult Index()
         {
             return View(db.GrupeProizvoda.ToList());
         }
 
-        // GET: GrupaProizvoda/Details/5
         public ActionResult Details(int? id)
         {
             if (id == null)
@@ -34,13 +37,11 @@ namespace RVASIspit.Controllers
             return View(grupaProizvoda);
         }
 
-        // GET: GrupaProizvoda/Create
         public ActionResult Create()
         {
             return View();
         }
 
-        // POST: GrupaProizvoda/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "GrupaProizvodaID,NazivGrupe")] GrupaProizvoda grupaProizvoda)
@@ -55,7 +56,6 @@ namespace RVASIspit.Controllers
             return View(grupaProizvoda);
         }
 
-        // GET: GrupaProizvoda/Edit/5
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -70,7 +70,6 @@ namespace RVASIspit.Controllers
             return View(grupaProizvoda);
         }
 
-        // POST: GrupaProizvoda/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "GrupaProizvodaID,NazivGrupe")] GrupaProizvoda grupaProizvoda)
@@ -84,7 +83,6 @@ namespace RVASIspit.Controllers
             return View(grupaProizvoda);
         }
 
-        // GET: GrupaProizvoda/Delete/5
         public ActionResult Delete(int? id)
         {
             if (id == null)
@@ -99,7 +97,6 @@ namespace RVASIspit.Controllers
             return View(grupaProizvoda);
         }
 
-        // POST: GrupaProizvoda/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
@@ -108,15 +105,6 @@ namespace RVASIspit.Controllers
             db.GrupeProizvoda.Remove(grupaProizvoda);
             db.SaveChanges();
             return RedirectToAction("Index");
-        }
-
-        protected override void Dispose(bool disposing)
-        {
-            if (disposing)
-            {
-                db.Dispose();
-            }
-            base.Dispose(disposing);
         }
     }
 }

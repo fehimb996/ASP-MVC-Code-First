@@ -13,13 +13,16 @@ namespace RVASIspit.Controllers
     {
         private CodeFirstBaza db = new CodeFirstBaza();
 
-        // GET: Zaposleni
+        protected override void Dispose(bool disposing)
+        {
+            db.Dispose();
+        }
+
         public ActionResult Index()
         {
             return View(db.Zaposleni.ToList());
         }
 
-        // GET: Zaposleni/Details/5
         public ActionResult Details(int? id)
         {
             if (id == null)
@@ -34,13 +37,11 @@ namespace RVASIspit.Controllers
             return View(zaposleni);
         }
 
-        // GET: Zaposleni/Create
         public ActionResult Create()
         {
             return View();
         }
 
-        // POST: Zaposleni/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "ZaposleniID,Ime,Prezime")] Zaposleni zaposleni)
@@ -55,7 +56,6 @@ namespace RVASIspit.Controllers
             return View(zaposleni);
         }
 
-        // GET: Zaposleni/Edit/5
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -70,7 +70,6 @@ namespace RVASIspit.Controllers
             return View(zaposleni);
         }
 
-        // POST: Zaposleni/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "ZaposleniID,Ime,Prezime")] Zaposleni zaposleni)
@@ -84,7 +83,6 @@ namespace RVASIspit.Controllers
             return View(zaposleni);
         }
 
-        // GET: Zaposleni/Delete/5
         public ActionResult Delete(int? id)
         {
             if (id == null)
@@ -99,7 +97,6 @@ namespace RVASIspit.Controllers
             return View(zaposleni);
         }
 
-        // POST: Zaposleni/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
@@ -108,15 +105,6 @@ namespace RVASIspit.Controllers
             db.Zaposleni.Remove(zaposleni);
             db.SaveChanges();
             return RedirectToAction("Index");
-        }
-
-        protected override void Dispose(bool disposing)
-        {
-            if (disposing)
-            {
-                db.Dispose();
-            }
-            base.Dispose(disposing);
         }
     }
 }
