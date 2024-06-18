@@ -6,20 +6,24 @@
 
 <h2>Proizvodi</h2>
 
+@if (!Model.Any())
+{
+    <p>Nema nijednog proizvoda.</p>
+}
+
 <p>
     @Html.ActionLink("Create New", "Create")
 </p>
-<div class="container-flex">
+<div class="card-container">
     <div class="row">
         @foreach (var item in Model)
         {
-            <div class="col-md-4">
                 <div class="card mb-4">
                     <div class="card-body">
                         <h4>@Html.DisplayFor(modelItem => item.Naziv)</h4>
-                        <p>@Html.DisplayFor(modelItem => item.Cena)</p>
-                        <p>@Html.DisplayFor(modelItem => item.GrupaProizvoda.NazivGrupe)</p>
-                        <p>@Html.DisplayFor(modelItem => item.VrstaProizvoda.NazivVrste)</p>
+                        <p class="fw-bold text-success">Cena: @Html.DisplayFor(modelItem => item.Cena) RSD</p>
+                        <p>Grupa proizvoda: @Html.DisplayFor(modelItem => item.GrupaProizvoda.NazivGrupe)</p>
+                        <p>Vrsta proizvoda: @Html.DisplayFor(modelItem => item.VrstaProizvoda.NazivVrste)</p>
                         <p>
                             @Html.ActionLink("Edit", "Edit", new { id = item.ProizvodID }) |
                             @Html.ActionLink("Details", "Details", new { id = item.ProizvodID }) |
@@ -27,7 +31,6 @@
                         </p>
                     </div>
                 </div>
-            </div>
         }
     </div>
 </div>

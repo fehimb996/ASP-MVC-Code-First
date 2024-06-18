@@ -14,6 +14,11 @@ namespace RVASIspit.Controllers
     {
         private CodeFirstBaza db = new CodeFirstBaza();
 
+        protected override void Dispose(bool disposing)
+        {
+            db.Dispose();
+        }
+
         // GET: Proizvodi
         public async Task<ActionResult> Index()
         {
@@ -118,15 +123,6 @@ namespace RVASIspit.Controllers
             db.Proizvodi.Remove(proizvod);
             await db.SaveChangesAsync();
             return RedirectToAction("Index");
-        }
-
-        protected override void Dispose(bool disposing)
-        {
-            if (disposing)
-            {
-                db.Dispose();
-            }
-            base.Dispose(disposing);
         }
     }
 }

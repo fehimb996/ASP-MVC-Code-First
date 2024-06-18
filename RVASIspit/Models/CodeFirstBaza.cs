@@ -21,10 +21,10 @@ namespace RVASIspit.Models
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
-            // Remove pluralizing table names convention
+            // Otklanjanje 's' 
             modelBuilder.Conventions.Remove<PluralizingTableNameConvention>();
 
-            // Define composite key for ProizvodSastojak
+            // Kompozitni kljuc 
             modelBuilder.Entity<ProizvodSastojak>()
                 .HasKey(ps => new { ps.ProizvodID, ps.SastojakID });
 
@@ -38,7 +38,7 @@ namespace RVASIspit.Models
                 .WithMany(s => s.ProizvodSastojci)
                 .HasForeignKey(ps => ps.SastojakID);
 
-            // Define composite key for StavkaRacuna
+            // Kompozitni kljucevi
             modelBuilder.Entity<StavkaRacuna>()
                 .HasKey(sr => new { sr.RacunID, sr.ProizvodID });
 
@@ -52,7 +52,7 @@ namespace RVASIspit.Models
                 .WithMany(p => p.StavkeRacuna)
                 .HasForeignKey(sr => sr.ProizvodID);
 
-            // Configure one-to-many relationships
+            // Jedan na vise relacije
             modelBuilder.Entity<Racun>()
                 .HasRequired(r => r.Klijent)
                 .WithMany(k => k.Racuni)
