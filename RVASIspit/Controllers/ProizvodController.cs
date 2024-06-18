@@ -1,12 +1,17 @@
-﻿using RVASIspit.Models;
+﻿using PagedList;
+using RVASIspit.Models;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.UI;
+using PagedList.Mvc;
+
 
 namespace RVASIspit.Controllers
 {
@@ -20,11 +25,60 @@ namespace RVASIspit.Controllers
         }
 
         // GET: Proizvodi
-        public async Task<ActionResult> Index()
+        public ActionResult Index(string sortOrder, string currentFilter, string searchString, int? grupaProizvodaId, int? vrstaProizvodaId, int? page)
         {
-            var proizvodi = db.Proizvodi.Include(p => p.GrupaProizvoda).Include(p => p.VrstaProizvoda);
-            return View(await proizvodi.ToListAsync());
+            ViewBag.CurrentSort = sortOrder;
+            ViewBag.NameSortParm = String.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
+            ViewBag.PriceSortParm = sortOrder == "Price" ? "price_desc" : "Price";
+            ViewBag.CurrentFilter = searchString;
+
+            var proizvodi = from p in db.Proizvodi.Include(p => p.GrupaProizvoda).Include(p => p.VrstaProizvoda)
+                            select p;
+
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                proizvodi = proizvodi.Where(p => p.Naziv.Contains(searchString));
+            }
+
+            if (grupaProizvodaId.HasValue)
+            {
+                proizvodi = proizvodi.Where(p => p.GrupaProizvodaID == grupaProizvodaId.Value);
+            }
+
+            if (vrstaProizvodaId.HasValue)
+            {
+                proizvodi = proizvodi.Where(p => p.VrstaProizvodaID == vrstaProizvodaId.Value);
+            }
+
+            switch (sortOrder)
+            {
+                case "name_desc":
+                    proizvodi = proizvodi.OrderByDescending(p => p.Naziv);
+                    break;
+                case "Price":
+                    proizvodi = proizvodi.OrderBy(p => p.Cena);
+                    break;
+                case "price_desc":
+                    proizvodi = proizvodi.OrderByDescending(p => p.Cena);
+                    break;
+                default:
+                    proizvodi = proizvodi.OrderBy(p => p.Naziv);
+                    break;
+            }
+
+            int pageSize = 10;
+            int pageNumber = (page ?? 1);
+
+            var grupeProizvoda = db.GrupeProizvoda.ToList();
+            var vrsteProizvoda = db.VrsteProizvoda.ToList();
+
+            ViewBag.GrupaProizvodaID = new SelectList(grupeProizvoda, "GrupaProizvodaID", "NazivGrupe");
+            ViewBag.VrstaProizvodaID = new SelectList(vrsteProizvoda, "VrstaProizvodaID", "NazivVrste");
+
+            return View(proizvodi.ToPagedList(pageNumber, pageSize));
         }
+
+
 
         // GET: Proizvod/Details/5
         public async Task<ActionResult> Details(int? id)

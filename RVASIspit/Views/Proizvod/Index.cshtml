@@ -1,36 +1,93 @@
-﻿@model IEnumerable<RVASIspit.Models.Proizvod>
+﻿@model PagedList.IPagedList<RVASIspit.Models.Proizvod>
+@using PagedList.Mvc;
 
 @{
     ViewBag.Title = "Proizvodi";
 }
 
-<h2>Proizvodi</h2>
+<h2 class="text-center pb-1">Proizvodi</h2>
+
+<div class="search-sort-form text-center">
+    @using (Html.BeginForm("Index", "Proizvod", FormMethod.Get))
+    {
+        <div class="form-inline d-flex justify-content-center">
+            <div class="form-group mx-2">
+                <input type="text" name="searchString" value="@ViewBag.CurrentFilter" placeholder="Pretraga po nazivu" class="form-control" />
+            </div>
+            <div class="form-group mx-2">
+                @Html.DropDownList("grupaProizvodaId", ViewBag.GrupaProizvodaID as SelectList, "Sve grupe", new { @class = "form-control" })
+            </div>
+            <div class="form-group mx-2">
+                @Html.DropDownList("vrstaProizvodaId", ViewBag.VrstaProizvodaID as SelectList, "Sve vrste", new { @class = "form-control" })
+            </div>
+            <div class="form-group mx-2">
+                <input type="submit" value="Search" class="btn btn-outline-success" />
+            </div>
+        </div>
+    }
+</div>
+
+<p class="text-center pt-2">
+    @Html.ActionLink("Dodaj novi proizvod", "Create", null, new { @class = "btn btn-primary" })
+</p>
 
 @if (!Model.Any())
 {
-    <p>Nema nijednog proizvoda.</p>
+    <p class="text-center">Nema nijednog proizvoda.</p>
+}
+else
+{
+    <table class="table table-bordered table-striped text-center table-hover">
+        <thead>
+            <tr>
+                <th>
+                    @Html.ActionLink("Naziv", "Index", new { sortOrder = ViewBag.NameSortParm, currentFilter = ViewBag.CurrentFilter, grupaProizvodaId = ViewBag.GrupaProizvodaID, vrstaProizvodaId = ViewBag.VrstaProizvodaID })
+                </th>
+                <th>
+                    @Html.ActionLink("Cena", "Index", new { sortOrder = ViewBag.PriceSortParm, currentFilter = ViewBag.CurrentFilter, grupaProizvodaId = ViewBag.GrupaProizvodaID, vrstaProizvodaId = ViewBag.VrstaProizvodaID })
+                </th>
+                <th>
+                    Grupa Proizvoda
+                </th>
+                <th>
+                    Vrsta Proizvoda
+                </th>
+                <th>Akcije</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Naziv)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Cena)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.GrupaProizvoda.NazivGrupe)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.VrstaProizvoda.NazivVrste)
+                    </td>
+                    <td>
+                        @Html.ActionLink("Edit", "Edit", new { id = item.ProizvodID }) |
+                        @Html.ActionLink("Details", "Details", new { id = item.ProizvodID }) |
+                        @Html.ActionLink("Delete", "Delete", new { id = item.ProizvodID })
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
 }
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<div class="card-container">
-    <div class="row">
-        @foreach (var item in Model)
-        {
-                <div class="card mb-4">
-                    <div class="card-body">
-                        <h4>@Html.DisplayFor(modelItem => item.Naziv)</h4>
-                        <p class="fw-bold text-success">Cena: @Html.DisplayFor(modelItem => item.Cena) RSD</p>
-                        <p>Grupa proizvoda: @Html.DisplayFor(modelItem => item.GrupaProizvoda.NazivGrupe)</p>
-                        <p>Vrsta proizvoda: @Html.DisplayFor(modelItem => item.VrstaProizvoda.NazivVrste)</p>
-                        <p>
-                            @Html.ActionLink("Edit", "Edit", new { id = item.ProizvodID }) |
-                            @Html.ActionLink("Details", "Details", new { id = item.ProizvodID }) |
-                            @Html.ActionLink("Delete", "Delete", new { id = item.ProizvodID })
-                        </p>
-                    </div>
-                </div>
-        }
+<div class="pagination-container text-center">
+    <div>
+        Stranica @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) od @Model.PageCount
+    </div>
+
+    <div>
+        @Html.PagedListPager(Model, page => Url.Action("Index", new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter, grupaProizvodaId = ViewBag.GrupaProizvodaID, vrstaProizvodaId = ViewBag.VrstaProizvodaID }))
     </div>
 </div>
