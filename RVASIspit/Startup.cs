@@ -34,7 +34,7 @@ namespace RVASIspit
                     roleManager.Create(role);
                 }
 
-                // Dodelite rolu Admin prvom korisniku
+                // Dodela role
                 var user = userManager.FindByEmail("admin@raf.rs");
                 if (user != null)
                 {
