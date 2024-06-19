@@ -22,6 +22,7 @@ namespace RVASIspit
                 var roleManager = new RoleManager<IdentityRole>(new RoleStore<IdentityRole>(context));
                 var userManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(context));
 
+                // Kreiraj role ako ne postoje
                 if (!roleManager.RoleExists("Admin"))
                 {
                     var role = new IdentityRole { Name = "Admin" };
@@ -34,17 +35,18 @@ namespace RVASIspit
                     roleManager.Create(role);
                 }
 
-                // Dodela role
-                var user = userManager.FindByEmail("admin@raf.rs");
-                if (user != null)
+                // Dodaj admina ako ne postoji i dodeli mu rolu Admin
+                var adminUser = userManager.FindByEmail("admin@raf.rs");
+                if (adminUser != null && !userManager.IsInRole(adminUser.Id, "Admin"))
                 {
-                    userManager.AddToRole(user.Id, "Admin");
+                    userManager.AddToRole(adminUser.Id, "Admin");
                 }
 
-                var user2 = userManager.FindByEmail("korisnik@raf.rs");
-                if(user2 != null)
+                // Dodaj korisnika ako ne postoji i dodeli mu rolu Korisnik
+                var korisnikUser = userManager.FindByEmail("korisnik@raf.rs");
+                if (korisnikUser != null && !userManager.IsInRole(korisnikUser.Id, "Korisnik"))
                 {
-                    userManager.AddToRole(user.Id, "Korisnik");
+                    userManager.AddToRole(korisnikUser.Id, "Korisnik");
                 }
             }
         }
