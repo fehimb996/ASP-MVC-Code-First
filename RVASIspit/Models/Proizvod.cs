@@ -15,6 +15,7 @@ namespace RVASIspit.Models
         public string Naziv { get; set; }
 
         [Required(ErrorMessage = "Cena proizvoda ne sme da bude prazna.")]
+        [Range(0, double.MaxValue, ErrorMessage = "Cena mora biti veća od 0.")]
         public decimal Cena { get; set; }
 
         public int? GrupaProizvodaID { get; set; }
