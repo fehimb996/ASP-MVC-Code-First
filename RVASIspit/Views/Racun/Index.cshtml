@@ -4,15 +4,18 @@
     ViewBag.Title = "Index";
 }
 
-<h2>Računi</h2>
+<h2 class="text-center">Računi</h2>
+
 @if (User.IsInRole("Admin"))
 {
-    <p>
-        @Html.ActionLink("Create New", "Create")
-    </p>
+    <div class="text-center">
+        <p>
+            @Html.ActionLink("Dodaj novi račun", "Create", null, new { @class = "btn btn-primary" })
+        </p>
+    </div>
 }
 
-<table class="table table-hover table-bordered table-responsive text-center">
+<table class="table table-hover table-bordered table-responsive text-center align-middle">
     <tr>
         <th>
             Klijent
@@ -47,15 +50,15 @@
             <td>
                 @if (User.IsInRole("Admin"))
                 {
-                    @Html.ActionLink("Edit", "Edit", new { id = item.RacunID })
+                    @Html.ActionLink("Edit", "Edit", new { id = item.RacunID }, new { @class = "btn btn-primary" })
                     <text> | </text>
-                    @Html.ActionLink("Details", "Details", new { id = item.RacunID })
+                    @Html.ActionLink("Details", "Details", new { id = item.RacunID }, new { @class = "btn btn-primary" })
                     <text> | </text>
-                    @Html.ActionLink("Delete", "Delete", new { id = item.RacunID })
+                    @Html.ActionLink("Delete", "Delete", new { id = item.RacunID }, new { @class = "btn btn-primary" })
                 }
                 else if (User.IsInRole("Korisnik"))
                 {
-                    @Html.ActionLink("Details", "Details", new { id = item.RacunID })
+                    @Html.ActionLink("Details", "Details", new { id = item.RacunID }, new { @class = "btn btn-primary" })
                 }
             </td>
         </tr>

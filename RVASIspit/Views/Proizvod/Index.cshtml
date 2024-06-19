@@ -40,7 +40,7 @@
 }
 else
 {
-    <table class="table table-bordered table-striped text-center table-hover">
+    <table class="table table-bordered table-striped text-center table-hover align-middle">
         <thead>
             <tr>
                 <th>
@@ -55,7 +55,7 @@ else
                 <th>
                     Vrsta Proizvoda
                 </th>
-                <th>Akcije</th>
+                <th></th>
             </tr>
         </thead>
         <tbody>
@@ -75,13 +75,13 @@ else
                         @Html.DisplayFor(modelItem => item.VrstaProizvoda.NazivVrste)
                     </td>
                     <td>
-                        @Html.ActionLink("Details", "Details", new { id = item.ProizvodID })
+                        @Html.ActionLink("Details", "Details", new { id = item.ProizvodID }, new { @class = "btn btn-primary" })
                         @if (User.IsInRole("Admin"))
                         {
                             <text> | </text>
-                            @Html.ActionLink("Edit", "Edit", new { id = item.ProizvodID })
+                            @Html.ActionLink("Edit", "Edit", new { id = item.ProizvodID }, new { @class = "btn btn-primary" })
                             <text> | </text>
-                            @Html.ActionLink("Delete", "Delete", new { id = item.ProizvodID })
+                            @Html.ActionLink("Delete", "Delete", new { id = item.ProizvodID }, new { @class = "btn btn-primary" })
                         }
                     </td>
                 </tr>

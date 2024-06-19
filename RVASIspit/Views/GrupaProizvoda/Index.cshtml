@@ -4,15 +4,18 @@
     ViewBag.Title = "GrupaProizvoda Index";
 }
 
-<h2>Grupe proizvoda</h2>
+<h2 class="text-center">Grupe proizvoda</h2>
+
 @if (User.IsInRole("Admin"))
 {
-    <p>
-        @Html.ActionLink("Create New", "Create")
-    </p>
+   <div class="text-center">
+       <p>
+           @Html.ActionLink("Dodaj novu grupu", "Create", null, new { @class = "btn btn-primary" })
+       </p>
+   </div>
 }
 
-<table class="table table-hover table-bordered table-responsive text-center">
+<table class="table table-hover table-bordered table-responsive text-center align-middle">
     <tr>
         <th>
             @Html.DisplayNameFor(model => model.NazivGrupe)
@@ -29,15 +32,15 @@
             <td>
                 @if (User.IsInRole("Admin"))
                 {
-                    @Html.ActionLink("Edit", "Edit", new { id = item.GrupaProizvodaID })
+                    @Html.ActionLink("Edit", "Edit", new { id = item.GrupaProizvodaID }, new { @class = "btn btn-primary" })
                     <text> | </text>
-                    @Html.ActionLink("Details", "Details", new { id = item.GrupaProizvodaID })
+                    @Html.ActionLink("Details", "Details", new { id = item.GrupaProizvodaID }, new { @class = "btn btn-primary" })
                     <text> | </text>
-                    @Html.ActionLink("Delete", "Delete", new { id = item.GrupaProizvodaID })
+                    @Html.ActionLink("Delete", "Delete", new { id = item.GrupaProizvodaID }, new { @class = "btn btn-primary" })
                 }
                 else if (User.IsInRole("Korisnik"))
                 {
-                    @Html.ActionLink("Details", "Details", new { id = item.GrupaProizvodaID })
+                    @Html.ActionLink("Details", "Details", new { id = item.GrupaProizvodaID }, new { @class = "btn btn-primary" })
                 }
             </td>
         </tr>

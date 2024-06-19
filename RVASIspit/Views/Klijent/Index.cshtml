@@ -4,15 +4,18 @@
     ViewBag.Title = "Klijenti";
 }
 
-<h2>Klijenti</h2>
+<h2 class="text-center">Klijenti</h2>
+
 
 @if (User.IsInRole("Admin"))
 {
-    <p>
-        @Html.ActionLink("Dodaj klijenta", "Create")
-    </p>
+   <div class="text-center">
+       <p>
+           @Html.ActionLink("Dodaj klijenta", "Create", null, new { @class = "btn btn-primary" })
+       </p>
+   </div>
 }
-    <table id="klijentiTable" class="table table-hover table-bordered table-responsive text-center">
+    <table id="klijentiTable" class="table table-hover table-bordered table-responsive text-center align-middle">
         <thead>
             <tr>
                 <th>
@@ -43,15 +46,15 @@
                     <td>
                         @if (User.IsInRole("Admin"))
                         {
-                            @Html.ActionLink("Edit", "Edit", new { id = item.KlijentID })
+                            @Html.ActionLink("Edit", "Edit", new { id = item.KlijentID }, new { @class = "btn btn-primary" })
                             <text> | </text>
-                            @Html.ActionLink("Details", "Details", new { id = item.KlijentID })
+                            @Html.ActionLink("Details", "Details", new { id = item.KlijentID }, new { @class = "btn btn-primary" })
                             <text> | </text>
-                            @Html.ActionLink("Delete", "Delete", new { id = item.KlijentID })
+                            @Html.ActionLink("Delete", "Delete", new { id = item.KlijentID }, new { @class = "btn btn-primary" })
                         }
                         else if (User.IsInRole("Korisnik"))
                         {
-                            @Html.ActionLink("Details", "Details", new { id = item.KlijentID })
+                            @Html.ActionLink("Details", "Details", new { id = item.KlijentID }, new { @class = "btn btn-primary" })
                         }
                     </td>
                 </tr>
@@ -76,10 +79,3 @@
             });
         </script>
     </section>
-}
-else
-{
-    <p>
-        Nemate dozvoljen pristup ovoj stranici.
-    </p>
-}
