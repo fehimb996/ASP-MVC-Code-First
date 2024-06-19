@@ -18,25 +18,31 @@ namespace RVASIspit.Controllers
             db.Dispose();
         }
 
+        [Authorize(Roles = "Admin, Korisnik")] // Samo registrovani korisnici sa ulogama Admin ili Korisnik mogu da pristupe Index
         public ActionResult Index()
         {
-            return View(db.Sastojci.ToList());
+            var sastojci = db.Sastojci.ToList();
+            return View(sastojci);
         }
 
+        [Authorize(Roles = "Admin, Korisnik")] // Samo registrovani korisnici sa ulogama Admin ili Korisnik mogu da pristupe Details
         public ActionResult Details(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
+
             Sastojak sastojak = db.Sastojci.Find(id);
             if (sastojak == null)
             {
                 return HttpNotFound();
             }
+
             return View(sastojak);
         }
 
+        [Authorize(Roles = "Admin")] // Samo admin može da pristupi Create formi
         public ActionResult Create()
         {
             return View();
@@ -44,6 +50,7 @@ namespace RVASIspit.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Admin")] // Samo admin može da kreira novi sastojak
         public ActionResult Create([Bind(Include = "SastojakID,NazivSastojka")] Sastojak sastojak)
         {
             if (ModelState.IsValid)
@@ -56,22 +63,26 @@ namespace RVASIspit.Controllers
             return View(sastojak);
         }
 
+        [Authorize(Roles = "Admin")] // Samo admin može da pristupi Edit formi
         public ActionResult Edit(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
+
             Sastojak sastojak = db.Sastojci.Find(id);
             if (sastojak == null)
             {
                 return HttpNotFound();
             }
+
             return View(sastojak);
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Admin")] // Samo admin može da izmeni sastojak
         public ActionResult Edit([Bind(Include = "SastojakID,NazivSastojka")] Sastojak sastojak)
         {
             if (ModelState.IsValid)
@@ -83,22 +94,26 @@ namespace RVASIspit.Controllers
             return View(sastojak);
         }
 
+        [Authorize(Roles = "Admin")] // Samo admin može da pristupi Delete formi
         public ActionResult Delete(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
+
             Sastojak sastojak = db.Sastojci.Find(id);
             if (sastojak == null)
             {
                 return HttpNotFound();
             }
+
             return View(sastojak);
         }
 
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Admin")] // Samo admin može da obriše sastojak
         public ActionResult DeleteConfirmed(int id)
         {
             Sastojak sastojak = db.Sastojci.Find(id);

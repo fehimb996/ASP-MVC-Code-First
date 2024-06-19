@@ -18,25 +18,7 @@ namespace RVASIspit.Controllers
             db.Dispose();
         }
 
-        public ActionResult Index()
-        {
-            return View(db.Klijenti.ToList());
-        }
-
-        public ActionResult Details(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Klijent klijent = db.Klijenti.Find(id);
-            if (klijent == null)
-            {
-                return HttpNotFound();
-            }
-            return View(klijent);
-        }
-
+        [Authorize(Roles = "Admin")]
         public ActionResult Create()
         {
             return View();
@@ -44,6 +26,7 @@ namespace RVASIspit.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Admin")]
         public ActionResult Create([Bind(Include = "KlijentID, Ime, Prezime, Telefon")] Klijent klijent)
         {
             if (ModelState.IsValid)
@@ -56,6 +39,7 @@ namespace RVASIspit.Controllers
             return View(klijent);
         }
 
+        [Authorize(Roles = "Admin")]
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -72,6 +56,7 @@ namespace RVASIspit.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Admin")]
         public ActionResult Edit([Bind(Include = "KlijentID,Ime,Prezime,Telefon")] Klijent klijent)
         {
             if (ModelState.IsValid)
@@ -83,6 +68,7 @@ namespace RVASIspit.Controllers
             return View(klijent);
         }
 
+        [Authorize(Roles = "Admin")]
         public ActionResult Delete(int? id)
         {
             if (id == null)
@@ -99,12 +85,42 @@ namespace RVASIspit.Controllers
 
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Admin")]
         public ActionResult DeleteConfirmed(int id)
         {
             Klijent klijent = db.Klijenti.Find(id);
             db.Klijenti.Remove(klijent);
             db.SaveChanges();
             return RedirectToAction("Index");
+        }
+
+        public ActionResult Details(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+
+            Klijent klijent = db.Klijenti.Find(id);
+            if (klijent == null)
+            {
+                return HttpNotFound();
+            }
+
+            // Provera da li je korisnik u ulozi "Admin" ili "Korisnik"
+            if (!User.IsInRole("Admin") && !User.IsInRole("Korisnik"))
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.Forbidden); // Ovde može biti i HttpNotFound()
+            }
+
+            return View(klijent);
+        }
+
+        // Index akcija vidljiva korisnicima sa ulogom Admin ili Korisnik
+        public ActionResult Index()
+        {
+            var klijenti = db.Klijenti.ToList();
+            return View(klijenti);
         }
     }
 }
