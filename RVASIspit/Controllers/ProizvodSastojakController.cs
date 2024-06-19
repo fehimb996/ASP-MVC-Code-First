@@ -123,7 +123,10 @@ namespace RVASIspit.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            ProizvodSastojak proizvodSastojak = db.SastojciProizvoda.Find(proizvodId, sastojakId);
+            ProizvodSastojak proizvodSastojak = db.SastojciProizvoda
+                                                    .Include(ps => ps.Proizvod)
+                                                    .Include(ps => ps.Sastojak)
+                                                    .FirstOrDefault(ps => ps.ProizvodID == proizvodId && ps.SastojakID == sastojakId);
             if (proizvodSastojak == null)
             {
                 return HttpNotFound();

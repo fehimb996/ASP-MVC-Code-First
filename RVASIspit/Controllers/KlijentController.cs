@@ -94,6 +94,7 @@ namespace RVASIspit.Controllers
             return RedirectToAction("Index");
         }
 
+        [Authorize(Roles = "Admin, Korisnik")]
         public ActionResult Details(int? id)
         {
             if (id == null)
@@ -115,6 +116,8 @@ namespace RVASIspit.Controllers
 
             return View(klijent);
         }
+
+        [Authorize(Roles = "Admin, Korisnik")]
 
         // Index akcija vidljiva korisnicima sa ulogom Admin ili Korisnik
         public ActionResult Index()

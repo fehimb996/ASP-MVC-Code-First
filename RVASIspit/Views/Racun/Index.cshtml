@@ -5,10 +5,13 @@
 }
 
 <h2>Računi</h2>
+@if (User.IsInRole("Admin"))
+{
+    <p>
+        @Html.ActionLink("Create New", "Create")
+    </p>
+}
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
 <table class="table table-hover table-bordered table-responsive text-center">
     <tr>
         <th>
@@ -42,9 +45,18 @@
                 @Html.DisplayFor(modelItem => item.UkupnaCena)
             </td>
             <td>
-                @Html.ActionLink("Edit", "Edit", new { id = item.RacunID }) |
-                @Html.ActionLink("Details", "Details", new { id = item.RacunID }) |
-                @Html.ActionLink("Delete", "Delete", new { id = item.RacunID })
+                @if (User.IsInRole("Admin"))
+                {
+                    @Html.ActionLink("Edit", "Edit", new { id = item.RacunID })
+                    <text> | </text>
+                    @Html.ActionLink("Details", "Details", new { id = item.RacunID })
+                    <text> | </text>
+                    @Html.ActionLink("Delete", "Delete", new { id = item.RacunID })
+                }
+                else if (User.IsInRole("Korisnik"))
+                {
+                    @Html.ActionLink("Details", "Details", new { id = item.RacunID })
+                }
             </td>
         </tr>
     }

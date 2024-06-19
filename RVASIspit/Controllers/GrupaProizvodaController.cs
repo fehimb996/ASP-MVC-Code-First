@@ -18,11 +18,15 @@ namespace RVASIspit.Controllers
             db.Dispose();
         }
 
+        // Index i Details akcije su vidljive korisnicima u ulogama Admin i Korisnik
+        [Authorize(Roles = "Admin, Korisnik")]
         public ActionResult Index()
         {
             return View(db.GrupeProizvoda.ToList());
         }
 
+        // Index i Details akcije su vidljive korisnicima u ulogama Admin i Korisnik
+        [Authorize(Roles = "Admin, Korisnik")]
         public ActionResult Details(int? id)
         {
             if (id == null)
@@ -37,6 +41,8 @@ namespace RVASIspit.Controllers
             return View(grupaProizvoda);
         }
 
+        // Samo admin može pristupiti Create akciji
+        [Authorize(Roles = "Admin")]
         public ActionResult Create()
         {
             return View();
@@ -44,6 +50,7 @@ namespace RVASIspit.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Admin")]
         public ActionResult Create([Bind(Include = "GrupaProizvodaID,NazivGrupe")] GrupaProizvoda grupaProizvoda)
         {
             if (ModelState.IsValid)
@@ -56,6 +63,8 @@ namespace RVASIspit.Controllers
             return View(grupaProizvoda);
         }
 
+        // Samo admin može pristupiti Edit akciji
+        [Authorize(Roles = "Admin")]
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -72,6 +81,7 @@ namespace RVASIspit.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Admin")]
         public ActionResult Edit([Bind(Include = "GrupaProizvodaID,NazivGrupe")] GrupaProizvoda grupaProizvoda)
         {
             if (ModelState.IsValid)
@@ -83,6 +93,8 @@ namespace RVASIspit.Controllers
             return View(grupaProizvoda);
         }
 
+        // Samo admin može pristupiti Delete akciji
+        [Authorize(Roles = "Admin")]
         public ActionResult Delete(int? id)
         {
             if (id == null)
@@ -99,6 +111,7 @@ namespace RVASIspit.Controllers
 
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Admin")]
         public ActionResult DeleteConfirmed(int id)
         {
             GrupaProizvoda grupaProizvoda = db.GrupeProizvoda.Find(id);

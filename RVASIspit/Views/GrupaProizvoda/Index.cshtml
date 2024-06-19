@@ -5,10 +5,13 @@
 }
 
 <h2>Grupe proizvoda</h2>
+@if (User.IsInRole("Admin"))
+{
+    <p>
+        @Html.ActionLink("Create New", "Create")
+    </p>
+}
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
 <table class="table table-hover table-bordered table-responsive text-center">
     <tr>
         <th>
@@ -24,9 +27,18 @@
                 @Html.DisplayFor(modelItem => item.NazivGrupe)
             </td>
             <td>
-                @Html.ActionLink("Edit", "Edit", new { id = item.GrupaProizvodaID }) |
-                @Html.ActionLink("Details", "Details", new { id = item.GrupaProizvodaID }) |
-                @Html.ActionLink("Delete", "Delete", new { id = item.GrupaProizvodaID })
+                @if (User.IsInRole("Admin"))
+                {
+                    @Html.ActionLink("Edit", "Edit", new { id = item.GrupaProizvodaID })
+                    <text> | </text>
+                    @Html.ActionLink("Details", "Details", new { id = item.GrupaProizvodaID })
+                    <text> | </text>
+                    @Html.ActionLink("Delete", "Delete", new { id = item.GrupaProizvodaID })
+                }
+                else if (User.IsInRole("Korisnik"))
+                {
+                    @Html.ActionLink("Details", "Details", new { id = item.GrupaProizvodaID })
+                }
             </td>
         </tr>
     }

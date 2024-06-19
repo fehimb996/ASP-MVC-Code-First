@@ -6,12 +6,12 @@
 
 <h2>Klijenti</h2>
 
-@if (User.Identity.IsAuthenticated && (User.IsInRole("Admin") || User.IsInRole("Korisnik")))
+@if (User.IsInRole("Admin"))
 {
     <p>
         @Html.ActionLink("Dodaj klijenta", "Create")
     </p>
-
+}
     <table id="klijentiTable" class="table table-hover table-bordered table-responsive text-center">
         <thead>
             <tr>

@@ -5,10 +5,13 @@
 }
 
 <h2>Stavke Racuna</h2>
+@if (User.IsInRole("Admin"))
+{
+    <p>
+        @Html.ActionLink("Create New", "Create")
+    </p>
+}
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
 <table class="table table-hover table-bordered table-responsive text-center">
     <tr>
         <th>
@@ -36,9 +39,18 @@
                 @Html.DisplayFor(modelItem => item.Cena)
             </td>
             <td>
-                @Html.ActionLink("Edit", "Edit", new { RacunID = item.RacunID, ProizvodID = item.ProizvodID }) |
-                @Html.ActionLink("Details", "Details", new { RacunID = item.RacunID, ProizvodID = item.ProizvodID }) |
-                @Html.ActionLink("Delete", "Delete", new { RacunID = item.RacunID, ProizvodID = item.ProizvodID })
+                @if (User.IsInRole("Admin"))
+                {
+                    @Html.ActionLink("Edit", "Edit", new { RacunID = item.RacunID, ProizvodID = item.ProizvodID })
+                    <text> | </text>
+                    @Html.ActionLink("Details", "Details", new { RacunID = item.RacunID, ProizvodID = item.ProizvodID })
+                    <text> | </text>
+                    @Html.ActionLink("Delete", "Delete", new { RacunID = item.RacunID, ProizvodID = item.ProizvodID })
+                }
+                else if (User.IsInRole("Korisnik"))
+                {
+                    @Html.ActionLink("Details", "Details", new { RacunID = item.RacunID, ProizvodID = item.ProizvodID })
+                }
             </td>
         </tr>
     }

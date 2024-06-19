@@ -18,19 +18,22 @@ namespace RVASIspit.Controllers
             db.Dispose();
         }
 
+        [Authorize(Roles = "Admin, Korisnik")]
         public ActionResult Index()
         {
             var stavkeRacuna = db.StavkeRacuna.Include(s => s.Proizvod).Include(s => s.Racun);
             return View(stavkeRacuna.ToList());
         }
 
-        public ActionResult Details(int? id)
+        [Authorize(Roles = "Admin, Korisnik")]
+        public ActionResult Details(int? racunID, int? proizvodID)
         {
-            if (id == null)
+            if (racunID == null || proizvodID == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            StavkaRacuna stavkaRacuna = db.StavkeRacuna.Find(id);
+            StavkaRacuna stavkaRacuna = db.StavkeRacuna.Include(s => s.Proizvod).Include(s => s.Racun)
+                                                       .FirstOrDefault(s => s.RacunID == racunID && s.ProizvodID == proizvodID);
             if (stavkaRacuna == null)
             {
                 return HttpNotFound();
@@ -38,6 +41,7 @@ namespace RVASIspit.Controllers
             return View(stavkaRacuna);
         }
 
+        [Authorize(Roles = "Admin")]
         public ActionResult Create()
         {
             ViewBag.ProizvodID = new SelectList(db.Proizvodi, "ProizvodID", "Naziv");
@@ -47,7 +51,8 @@ namespace RVASIspit.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "StavkaRacunaID,RacunID,ProizvodID,Cena")] StavkaRacuna stavkaRacuna)
+        [Authorize(Roles = "Admin")]
+        public ActionResult Create([Bind(Include = "RacunID,ProizvodID,Cena")] StavkaRacuna stavkaRacuna)
         {
             if (ModelState.IsValid)
             {
@@ -61,13 +66,14 @@ namespace RVASIspit.Controllers
             return View(stavkaRacuna);
         }
 
-        public ActionResult Edit(int? id)
+        [Authorize(Roles = "Admin")]
+        public ActionResult Edit(int? racunID, int? proizvodID)
         {
-            if (id == null)
+            if (racunID == null || proizvodID == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            StavkaRacuna stavkaRacuna = db.StavkeRacuna.Find(id);
+            StavkaRacuna stavkaRacuna = db.StavkeRacuna.Find(racunID, proizvodID);
             if (stavkaRacuna == null)
             {
                 return HttpNotFound();
@@ -79,7 +85,8 @@ namespace RVASIspit.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "StavkaRacunaID,RacunID,ProizvodID,Cena")] StavkaRacuna stavkaRacuna)
+        [Authorize(Roles = "Admin")]
+        public ActionResult Edit([Bind(Include = "RacunID,ProizvodID,Cena")] StavkaRacuna stavkaRacuna)
         {
             if (ModelState.IsValid)
             {
@@ -92,13 +99,14 @@ namespace RVASIspit.Controllers
             return View(stavkaRacuna);
         }
 
-        public ActionResult Delete(int? id)
+        [Authorize(Roles = "Admin")]
+        public ActionResult Delete(int? racunID, int? proizvodID)
         {
-            if (id == null)
+            if (racunID == null || proizvodID == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            StavkaRacuna stavkaRacuna = db.StavkeRacuna.Find(id);
+            StavkaRacuna stavkaRacuna = db.StavkeRacuna.Find(racunID, proizvodID);
             if (stavkaRacuna == null)
             {
                 return HttpNotFound();
@@ -108,9 +116,10 @@ namespace RVASIspit.Controllers
 
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(int id)
+        [Authorize(Roles = "Admin")]
+        public ActionResult DeleteConfirmed(int racunID, int proizvodID)
         {
-            StavkaRacuna stavkaRacuna = db.StavkeRacuna.Find(id);
+            StavkaRacuna stavkaRacuna = db.StavkeRacuna.Find(racunID, proizvodID);
             db.StavkeRacuna.Remove(stavkaRacuna);
             db.SaveChanges();
             return RedirectToAction("Index");
