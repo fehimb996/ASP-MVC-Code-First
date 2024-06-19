@@ -185,7 +185,6 @@
     <Compile Include="Controllers\ProizvodController.cs" />
     <Compile Include="Controllers\ProizvodSastojakController.cs" />
     <Compile Include="Controllers\RacunController.cs" />
-    <Compile Include="Controllers\RoleController.cs" />
     <Compile Include="Controllers\SastojakController.cs" />
     <Compile Include="Controllers\StavkaRacunaController.cs" />
     <Compile Include="Controllers\VrstaProizvodaController.cs" />
@@ -207,7 +206,6 @@
     <Compile Include="Models\Proizvod.cs" />
     <Compile Include="Models\ProizvodSastojak.cs" />
     <Compile Include="Models\Racun.cs" />
-    <Compile Include="Models\RoleName.cs" />
     <Compile Include="Models\Sastojak.cs" />
     <Compile Include="Models\StavkaRacuna.cs" />
     <Compile Include="Models\VrstaProizvoda.cs" />
@@ -337,7 +335,6 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Content\images\" />
-    <Folder Include="Views\Role\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap.rtl.min.css.map" />
