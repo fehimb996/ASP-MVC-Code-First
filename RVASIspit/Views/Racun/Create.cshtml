@@ -1,10 +1,10 @@
 ﻿@model RVASIspit.Models.Racun
 
 @{
-    ViewBag.Title = "Create";
+    ViewBag.Title = "Kreiran Racun";
 }
 
-<h2>Create</h2>
+<h2>Kreiraj racun</h2>
 
 @using (Html.BeginForm())
 {
@@ -56,5 +56,5 @@
 }
 
 <div>
-    @Html.ActionLink("Back to List", "Index")
+    @Html.ActionLink("Back to List", "Index", null, new { @class = "btn btn-primary" })
 </div>

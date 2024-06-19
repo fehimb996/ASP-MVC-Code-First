@@ -1,10 +1,10 @@
 ﻿@model RVASIspit.Models.StavkaRacuna
 
 @{
-    ViewBag.Title = "Create";
+    ViewBag.Title = "Dodaj stavka racuna";
 }
 
-<h2>Create</h2>
+<h2>Dodaj stavka racuna</h2>
 
 @using (Html.BeginForm())
 {
@@ -47,7 +47,7 @@
 }
 
 <div>
-    @Html.ActionLink("Back to List", "Index")
+    @Html.ActionLink("Back to List", "Index", null, new { @class = "btn btn-primary" })
 </div>
 
 @section Scripts {

@@ -1,10 +1,10 @@
 ﻿@model RVASIspit.Models.ProizvodSastojak
 
 @{
-    ViewBag.Title = "Create";
+    ViewBag.Title = "Dodaj sastojak";
 }
 
-<h2>Create</h2>
+<h2>Dodaj Sastojak</h2>
 
 @using (Html.BeginForm())
 {
@@ -40,5 +40,5 @@
 }
 
 <div>
-    @Html.ActionLink("Back to List", "Index")
+    @Html.ActionLink("Back to List", "Index", null, new { @class = "btn btn-primary" })
 </div>
