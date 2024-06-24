@@ -45,27 +45,34 @@ namespace RVASIspit.Controllers
         }
 
         // Samo admin može pristupiti CUD akcijama
-        [Authorize(Roles = "Admin")]
+        [Authorize(Roles = "Admin")] // Samo admin može da pristupi Edit formi
         public ActionResult Edit(int? proizvodId, int? sastojakId)
         {
             if (proizvodId == null || sastojakId == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            ProizvodSastojak proizvodSastojak = db.SastojciProizvoda.Find(proizvodId, sastojakId);
+
+            ProizvodSastojak proizvodSastojak = db.SastojciProizvoda
+                                                .Include(ps => ps.Proizvod)
+                                                .Include(ps => ps.Sastojak)
+                                                .FirstOrDefault(ps => ps.ProizvodID == proizvodId && ps.SastojakID == sastojakId);
+
             if (proizvodSastojak == null)
             {
                 return HttpNotFound();
             }
+
             ViewBag.ProizvodID = new SelectList(db.Proizvodi, "ProizvodID", "Naziv", proizvodSastojak.ProizvodID);
             ViewBag.SastojakID = new SelectList(db.Sastojci, "SastojakID", "NazivSastojka", proizvodSastojak.SastojakID);
+
             return View(proizvodSastojak);
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        [Authorize(Roles = "Admin")]
-        public ActionResult Edit([Bind(Include = "ProizvodID,SastojakID")] ProizvodSastojak proizvodSastojak)
+        [Authorize(Roles = "Admin")] // Samo admin može da izmeni proizvod sastojak
+        public ActionResult Edit(ProizvodSastojak proizvodSastojak)
         {
             if (ModelState.IsValid)
             {
@@ -73,10 +80,13 @@ namespace RVASIspit.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
+
             ViewBag.ProizvodID = new SelectList(db.Proizvodi, "ProizvodID", "Naziv", proizvodSastojak.ProizvodID);
             ViewBag.SastojakID = new SelectList(db.Sastojci, "SastojakID", "NazivSastojka", proizvodSastojak.SastojakID);
+
             return View(proizvodSastojak);
         }
+
 
         // Samo admin može pristupiti CUD akcijama
         [Authorize(Roles = "Admin")]
