@@ -157,11 +157,17 @@ namespace RVASIspit.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Proizvod proizvod = await db.Proizvodi.FindAsync(id);
+
+            Proizvod proizvod = await db.Proizvodi
+                                        .Include(p => p.GrupaProizvoda)
+                                        .Include(p => p.VrstaProizvoda)
+                                        .FirstOrDefaultAsync(p => p.ProizvodID == id);
+
             if (proizvod == null)
             {
                 return HttpNotFound();
             }
+
             return View(proizvod);
         }
 

@@ -111,7 +111,7 @@ namespace RVASIspit.Controllers
             // Provera da li je korisnik u ulozi "Admin" ili "Korisnik"
             if (!User.IsInRole("Admin") && !User.IsInRole("Korisnik"))
             {
-                return new HttpStatusCodeResult(HttpStatusCode.Forbidden); // Ovde može biti i HttpNotFound()
+                return new HttpStatusCodeResult(HttpStatusCode.Forbidden);
             }
 
             return View(klijent);
