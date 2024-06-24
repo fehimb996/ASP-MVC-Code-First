@@ -1,10 +1,16 @@
 ﻿@model IEnumerable<RVASIspit.Models.StavkaRacuna>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Stavke Računa";
 }
 
-<h2 class="text-center">Stavke Racuna</h2>
+<h2 class="text-center">Stavke Računa</h2>
+
+@if (!Model.Any())
+{
+    <p class="text-center">Stavka računa tabela je prazna.</p>
+}
+
 @if (User.IsInRole("Admin"))
 {
     <div class="text-center">

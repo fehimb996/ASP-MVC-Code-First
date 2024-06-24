@@ -1,17 +1,23 @@
 ﻿@model IEnumerable<RVASIspit.Models.Sastojak>
 
 @{
-    ViewBag.Title = "Sastojci Index";
+    ViewBag.Title = "Sastojci";
 }
 
 <h2 class="text-center">Sastojci</h2>
+
+@if (!Model.Any())
+{
+    <p class="text-center">Sastojci tabela je prazna.</p>
+}
+
 @if (User.IsInRole("Admin"))
 {
-   <div class="text-center">
-       <p>
-           @Html.ActionLink("Dodaj novi", "Create", null, new { @class = "btn btn-primary" })
-       </p>
-   </div>
+    <div class="text-center">
+        <p>
+            @Html.ActionLink("Dodaj novi", "Create", null, new { @class = "btn btn-primary" })
+        </p>
+    </div>
 }
 
 <table id="sastojciTable" class="table table-hover table-bordered table-responsive text-center align-middle">

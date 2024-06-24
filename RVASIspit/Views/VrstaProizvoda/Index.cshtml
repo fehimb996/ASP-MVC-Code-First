@@ -1,10 +1,15 @@
 ﻿@model IEnumerable<RVASIspit.Models.VrstaProizvoda>
 
 @{
-    ViewBag.Title = "Vrste Proizvoda Index";
+    ViewBag.Title = "Vrste Proizvoda";
 }
 
 <h2 class="text-center">Vrste proizvoda</h2>
+
+@if (!Model.Any())
+{
+    <p class="text-center">Vrste proizvoda tabela je prazna.</p>
+}
 
 @if (User.IsInRole("Admin"))
 {
