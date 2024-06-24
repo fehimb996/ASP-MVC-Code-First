@@ -20,14 +20,18 @@
                 <ul class="navbar-nav flex-grow-1">
                     <li>@Html.ActionLink("Home", "Index", "Home", new { area = "" }, new { @class = "nav-link" })</li>
                     <li>@Html.ActionLink("Proizvodi", "Index", "Proizvod", new { area = "" }, new { @class = "nav-link" })</li>
-                    <li>@Html.ActionLink("Zaposleni", "Index", "Zaposleni", new { area = "" }, new { @class = "nav-link" })</li>
-                    <li>@Html.ActionLink("Klijenti", "Index", "Klijent", new { area = "" }, new { @class = "nav-link" })</li>
-                    <li>@Html.ActionLink("Sastojci", "Index", "Sastojak", new { area = "" }, new { @class = "nav-link" })</li>
-                    <li>@Html.ActionLink("Sastojci proizvoda", "Index", "ProizvodSastojak", new { area = "" }, new { @class = "nav-link" })</li>
-                    <li>@Html.ActionLink("Vrste proizvoda", "Index", "VrstaProizvoda", new { area = "" }, new { @class = "nav-link" })</li>
-                    <li>@Html.ActionLink("Grupe proizvoda", "Index", "GrupaProizvoda", new { area = "" }, new { @class = "nav-link" })</li>
-                    <li>@Html.ActionLink("Računi", "Index", "Racun", new { area = "" }, new { @class = "nav-link" })</li>
-                    <li>@Html.ActionLink("Stavke računa", "Index", "StavkaRacuna", new { area = "" }, new { @class = "nav-link" })</li>
+                    @*@if (User.IsInRole("Admin") || User.IsInRole("Korisnik"))
+                    {*@
+                        <li>@Html.ActionLink("Zaposleni", "Index", "Zaposleni", new { area = "" }, new { @class = "nav-link" })</li>
+                        <li>@Html.ActionLink("Klijenti", "Index", "Klijent", new { area = "" }, new { @class = "nav-link" })</li>
+                        <li>@Html.ActionLink("Sastojci", "Index", "Sastojak", new { area = "" }, new { @class = "nav-link" })</li>
+                        <li>@Html.ActionLink("Sastojci proizvoda", "Index", "ProizvodSastojak", new { area = "" }, new { @class = "nav-link" })</li>
+                        <li>@Html.ActionLink("Vrste proizvoda", "Index", "VrstaProizvoda", new { area = "" }, new { @class = "nav-link" })</li>
+                        <li>@Html.ActionLink("Grupe proizvoda", "Index", "GrupaProizvoda", new { area = "" }, new { @class = "nav-link" })</li>
+                        <li>@Html.ActionLink("Računi", "Index", "Racun", new { area = "" }, new { @class = "nav-link" })</li>
+                        <li>@Html.ActionLink("Stavke računa", "Index", "StavkaRacuna", new { area = "" }, new { @class = "nav-link" })</li>
+                    @*}*@
+
                 </ul>
                 @Html.Partial("_LoginPartial")
             </div>

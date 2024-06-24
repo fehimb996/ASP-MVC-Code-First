@@ -96,6 +96,19 @@ else
     </div>
 
     <div>
-        @Html.PagedListPager(Model, page => Url.Action("Index", new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter, grupaProizvodaId = ViewBag.GrupaProizvodaID, vrstaProizvodaId = ViewBag.VrstaProizvodaID }))
+        @Html.PagedListPager(Model, page => Url.Action("Index", new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter, grupaProizvodaId = ViewBag.GrupaProizvodaID, vrstaProizvodaId = ViewBag.VrstaProizvodaID }), new PagedListRenderOptions
+        {
+            LinkToFirstPageFormat = "Prva",
+            LinkToLastPageFormat = "Poslednja",
+            LinkToNextPageFormat = "Sledeća",
+            LinkToPreviousPageFormat = "Prethodna",
+            MaximumPageNumbersToDisplay = 5,
+            ContainerDivClasses = new[] { "pagination" },
+            FunctionToTransformEachPageLink = (liTag, aTag) =>
+            {
+                aTag.AddCssClass("btn btn-primary mx-1");
+                return aTag;
+            }
+        })
     </div>
 </div>
