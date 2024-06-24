@@ -42,8 +42,8 @@
         @Html.AntiForgeryToken()
 
         <div class="form-group">
-            <input type="submit" value="Delete" class="btn btn-danger" /> |
-            @Html.ActionLink("Back to List", "Index")
+            <input type="submit" value="Obriši" class="btn btn-danger" /> |
+            @Html.ActionLink("Idi nazad", "Index", null, new { @class = "btn btn-primary" })
         </div>
     }
 </div>

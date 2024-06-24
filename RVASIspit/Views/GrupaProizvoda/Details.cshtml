@@ -22,8 +22,8 @@
 <div>
     @if (User.IsInRole("Admin"))
     {
-        @Html.ActionLink("Edit", "Edit", new { id = Model.GrupaProizvodaID }, new { @class = "btn btn-warning" }) <text> | </text>
+        @Html.ActionLink("Izmeni", "Edit", new { id = Model.GrupaProizvodaID }, new { @class = "btn btn-warning" }) <text> | </text>
     }
 
-    @Html.ActionLink("Back to List", "Index", null, new { @class = "btn btn-primary" })
+    @Html.ActionLink("Idi nazad", "Index", null, new { @class = "btn btn-primary" })
 </div>
