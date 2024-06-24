@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@ViewBag.Title - My ASP.NET Application</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-    <link rel="stylesheet" href="~/Content/Site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/Content/site.css" asp-append-version="true" />
     <!-- DataTables CSS -->
     <link rel="stylesheet" href="https://cdn.datatables.net/1.11.3/css/jquery.dataTables.min.css">
 </head>
@@ -21,15 +21,15 @@
                     <li>@Html.ActionLink("Home", "Index", "Home", new { area = "" }, new { @class = "nav-link" })</li>
                     <li>@Html.ActionLink("Proizvodi", "Index", "Proizvod", new { area = "" }, new { @class = "nav-link" })</li>
                     @*@if (User.IsInRole("Admin") || User.IsInRole("Korisnik"))
-                    {*@
-                        <li>@Html.ActionLink("Zaposleni", "Index", "Zaposleni", new { area = "" }, new { @class = "nav-link" })</li>
-                        <li>@Html.ActionLink("Klijenti", "Index", "Klijent", new { area = "" }, new { @class = "nav-link" })</li>
-                        <li>@Html.ActionLink("Sastojci", "Index", "Sastojak", new { area = "" }, new { @class = "nav-link" })</li>
-                        <li>@Html.ActionLink("Sastojci proizvoda", "Index", "ProizvodSastojak", new { area = "" }, new { @class = "nav-link" })</li>
-                        <li>@Html.ActionLink("Vrste proizvoda", "Index", "VrstaProizvoda", new { area = "" }, new { @class = "nav-link" })</li>
-                        <li>@Html.ActionLink("Grupe proizvoda", "Index", "GrupaProizvoda", new { area = "" }, new { @class = "nav-link" })</li>
-                        <li>@Html.ActionLink("Računi", "Index", "Racun", new { area = "" }, new { @class = "nav-link" })</li>
-                        <li>@Html.ActionLink("Stavke računa", "Index", "StavkaRacuna", new { area = "" }, new { @class = "nav-link" })</li>
+                        {*@
+                    <li>@Html.ActionLink("Zaposleni", "Index", "Zaposleni", new { area = "" }, new { @class = "nav-link" })</li>
+                    <li>@Html.ActionLink("Klijenti", "Index", "Klijent", new { area = "" }, new { @class = "nav-link" })</li>
+                    <li>@Html.ActionLink("Sastojci", "Index", "Sastojak", new { area = "" }, new { @class = "nav-link" })</li>
+                    <li>@Html.ActionLink("Sastojci proizvoda", "Index", "ProizvodSastojak", new { area = "" }, new { @class = "nav-link" })</li>
+                    <li>@Html.ActionLink("Vrste proizvoda", "Index", "VrstaProizvoda", new { area = "" }, new { @class = "nav-link" })</li>
+                    <li>@Html.ActionLink("Grupe proizvoda", "Index", "GrupaProizvoda", new { area = "" }, new { @class = "nav-link" })</li>
+                    <li>@Html.ActionLink("Računi", "Index", "Racun", new { area = "" }, new { @class = "nav-link" })</li>
+                    <li>@Html.ActionLink("Stavke računa", "Index", "StavkaRacuna", new { area = "" }, new { @class = "nav-link" })</li>
                     @*}*@
 
                 </ul>
@@ -46,6 +46,8 @@
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
     @RenderSection("scripts", required: false)
 </body>
 </html>
