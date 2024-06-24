@@ -13,42 +13,36 @@
 
 @if (User.IsInRole("Admin"))
 {
-    <div class="text-center">
+    <div class="text-center mb-3">
         <p>
             @Html.ActionLink("Dodaj novu vrstu", "Create", null, new { @class = "btn btn-primary" })
         </p>
     </div>
 }
 
-<table class="table table-hover table-bordered table-responsive text-center align-middle">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.NazivVrste)
-        </th>
-        <th></th>
-    </tr>
-
+<div class="row">
     @foreach (var item in Model)
     {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.NazivVrste)
-            </td>
-            <td>
-                @if (User.IsInRole("Admin"))
-                {
-                    @Html.ActionLink("Edit", "Edit", new { id = item.VrstaProizvodaID }, new { @class = "btn btn-primary" })
-                    <text> | </text>
-                    @Html.ActionLink("Details", "Details", new { id = item.VrstaProizvodaID }, new { @class = "btn btn-primary" })
-                    <text> | </text>
-                    @Html.ActionLink("Delete", "Delete", new { id = item.VrstaProizvodaID }, new { @class = "btn btn-primary" })
-                }
-                else if (User.IsInRole("Korisnik"))
-                {
-                    @Html.ActionLink("Details", "Details", new { id = item.VrstaProizvodaID }, new { @class = "btn btn-primary" })
-                }
-            </td>
-        </tr>
+        <div class="col-md-4 mb-4">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">@Html.DisplayFor(modelItem => item.NazivVrste)</h5>
+                    <div class="text-center">
+                        <div class="btn-group" role="group" aria-label="Akcije">
+                            @if (User.IsInRole("Admin"))
+                            {
+                                @Html.ActionLink("Edit", "Edit", new { id = item.VrstaProizvodaID }, new { @class = "btn btn-primary" })
+                                @Html.ActionLink("Details", "Details", new { id = item.VrstaProizvodaID }, new { @class = "btn btn-primary" })
+                                @Html.ActionLink("Delete", "Delete", new { id = item.VrstaProizvodaID }, new { @class = "btn btn-primary" })
+                            }
+                            else if (User.IsInRole("Korisnik"))
+                            {
+                                @Html.ActionLink("Details", "Details", new { id = item.VrstaProizvodaID }, new { @class = "btn btn-primary" })
+                            }
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     }
-
-</table>
+</div>

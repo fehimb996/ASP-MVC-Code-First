@@ -51,8 +51,8 @@ else
             <div class="col-md-3 mb-4">
                 <div class="card">
                     <div class="card-body">
-                        <h5 class="card-title">@Html.DisplayFor(modelItem => item.Naziv)</h5>
-                        <p class="card-text">Cena: @Html.DisplayFor(modelItem => item.Cena)</p>
+                        <h5 class="card-title text-info">@Html.DisplayFor(modelItem => item.Naziv)</h5>
+                        <p class="card-text text-success">Cena: @Html.DisplayFor(modelItem => item.Cena)</p>
                         <p class="card-text">Grupa: @Html.DisplayFor(modelItem => item.GrupaProizvoda.NazivGrupe)</p>
                         <p class="card-text">Vrsta: @Html.DisplayFor(modelItem => item.VrstaProizvoda.NazivVrste)</p>
                         <a href="@Url.Action("Details", new { id = item.ProizvodID })" class="btn btn-primary">Detalji</a>

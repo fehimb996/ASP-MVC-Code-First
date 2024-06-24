@@ -19,6 +19,7 @@
         </p>
     </div>
 }
+
 <table id="klijentiTable" class="table table-hover table-bordered table-responsive text-center align-middle">
     <thead>
         <tr>
@@ -66,7 +67,7 @@
     </tbody>
 </table>
 
-<section>
+@section scripts {
     <!-- jQuery -->
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
     <!-- DataTables JavaScript -->
@@ -80,6 +81,5 @@
                 "ordering": true,
                 "searching": true
             });
-        });
-    </script>
-</section>
+        });</script>
+}
