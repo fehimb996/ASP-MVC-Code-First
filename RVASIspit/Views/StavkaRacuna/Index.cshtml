@@ -47,18 +47,18 @@
                 @Html.DisplayFor(modelItem => item.Cena)
             </td>
             <td>
-                @if (User.IsInRole("Admin"))
-                {
-                    @Html.ActionLink("Edit", "Edit", new { RacunID = item.RacunID, ProizvodID = item.ProizvodID }, new { @class = "btn btn-primary" })
-                    <text> | </text>
-                    @Html.ActionLink("Details", "Details", new { RacunID = item.RacunID, ProizvodID = item.ProizvodID }, new { @class = "btn btn-primary" })
-                    <text> | </text>
-                    @Html.ActionLink("Delete", "Delete", new { RacunID = item.RacunID, ProizvodID = item.ProizvodID }, new { @class = "btn btn-primary" })
-                }
-                else if (User.IsInRole("Korisnik"))
-                {
-                    @Html.ActionLink("Details", "Details", new { RacunID = item.RacunID, ProizvodID = item.ProizvodID }, new { @class = "btn btn-primary" })
-                }
+                <div class="btn-group" role="group" aria-label="Akcije">
+                    @if (User.IsInRole("Admin"))
+                    {
+                        @Html.ActionLink("Edit", "Edit", new { RacunID = item.RacunID, ProizvodID = item.ProizvodID }, new { @class = "btn btn-primary" })
+                        @Html.ActionLink("Details", "Details", new { RacunID = item.RacunID, ProizvodID = item.ProizvodID }, new { @class = "btn btn-primary" })
+                        @Html.ActionLink("Delete", "Delete", new { RacunID = item.RacunID, ProizvodID = item.ProizvodID }, new { @class = "btn btn-primary" })
+                    }
+                    else if (User.IsInRole("Korisnik"))
+                    {
+                        @Html.ActionLink("Details", "Details", new { RacunID = item.RacunID, ProizvodID = item.ProizvodID }, new { @class = "btn btn-primary" })
+                    }
+                </div>
             </td>
         </tr>
     }
