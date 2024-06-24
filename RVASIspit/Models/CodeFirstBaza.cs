@@ -21,53 +21,60 @@ namespace RVASIspit.Models
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
-            // Otklanjanje 's' 
+            // Otklanjanje 's' iz imena tabela
             modelBuilder.Conventions.Remove<PluralizingTableNameConvention>();
 
-            // Kompozitni kljuc 
+            // Kompozitni kljuc za tabelu ProizvodSastojak (many-to-many relacija između Proizvod i Sastojak)
             modelBuilder.Entity<ProizvodSastojak>()
                 .HasKey(ps => new { ps.ProizvodID, ps.SastojakID });
 
+            // Definisanje veze za tabelu ProizvodSastojak - jedan Proizvod može imati više ProizvodSastojak (many-to-many relacija)
             modelBuilder.Entity<ProizvodSastojak>()
                 .HasRequired(ps => ps.Proizvod)
                 .WithMany(p => p.ProizvodSastojci)
                 .HasForeignKey(ps => ps.ProizvodID);
 
+            // Definisanje veze za tabelu ProizvodSastojak - jedan Sastojak može imati više ProizvodSastojak (many-to-many relacija)
             modelBuilder.Entity<ProizvodSastojak>()
                 .HasRequired(ps => ps.Sastojak)
                 .WithMany(s => s.ProizvodSastojci)
                 .HasForeignKey(ps => ps.SastojakID);
 
-            // Kompozitni kljucevi
+            // Kompozitni ključ za tabelu StavkaRacuna (many-to-many relacija između Racun i Proizvod)
             modelBuilder.Entity<StavkaRacuna>()
                 .HasKey(sr => new { sr.RacunID, sr.ProizvodID });
 
+            // Definisanje veze za tabelu StavkaRacuna - jedan Racun može imati više StavkaRacuna (many-to-many relacija)
             modelBuilder.Entity<StavkaRacuna>()
                 .HasRequired(sr => sr.Racun)
                 .WithMany(r => r.StavkeRacuna)
                 .HasForeignKey(sr => sr.RacunID);
 
+            // Definisanje veze za tabelu StavkaRacuna - jedan Proizvod može imati više StavkaRacuna (many-to-many relacija)
             modelBuilder.Entity<StavkaRacuna>()
                 .HasRequired(sr => sr.Proizvod)
                 .WithMany(p => p.StavkeRacuna)
                 .HasForeignKey(sr => sr.ProizvodID);
 
-            // Jedan na vise relacije
+            // Jedan na više relacija - jedan Klijent može imati više Racun entiteta
             modelBuilder.Entity<Racun>()
                 .HasRequired(r => r.Klijent)
                 .WithMany(k => k.Racuni)
                 .HasForeignKey(r => r.KlijentID);
 
+            // Jedan na više relacija - jedan Zaposleni može imati više Racun entiteta
             modelBuilder.Entity<Racun>()
                 .HasRequired(r => r.Zaposleni)
                 .WithMany(z => z.Racuni)
                 .HasForeignKey(r => r.ZaposleniID);
 
+            // Jedan na više relacija - jedna GrupaProizvoda može imati više Proizvod entiteta
             modelBuilder.Entity<Proizvod>()
                 .HasOptional(p => p.GrupaProizvoda)
                 .WithMany(g => g.Proizvodi)
                 .HasForeignKey(p => p.GrupaProizvodaID);
 
+            // Jedan na više relacija - jedna VrstaProizvoda može imati više Proizvod entiteta
             modelBuilder.Entity<Proizvod>()
                 .HasOptional(p => p.VrstaProizvoda)
                 .WithMany(v => v.Proizvodi)
