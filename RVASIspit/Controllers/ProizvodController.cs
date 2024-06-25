@@ -12,7 +12,6 @@ using System.Web.Mvc;
 using System.Web.UI;
 using PagedList.Mvc;
 
-
 namespace RVASIspit.Controllers
 {
     public class ProizvodController : Controller
@@ -77,20 +76,19 @@ namespace RVASIspit.Controllers
             return View(proizvodi.ToPagedList(pageNumber, pageSize));
         }
 
-        public async Task<ActionResult> Details(int? id)
+        public ActionResult Details(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Proizvod proizvod = await db.Proizvodi.Include(p => p.GrupaProizvoda).Include(p => p.VrstaProizvoda).FirstOrDefaultAsync(p => p.ProizvodID == id);
+            Proizvod proizvod = db.Proizvodi.Include(p => p.GrupaProizvoda).Include(p => p.VrstaProizvoda).FirstOrDefault(p => p.ProizvodID == id);
             if (proizvod == null)
             {
                 return HttpNotFound();
             }
             return View(proizvod);
         }
-
 
         [Authorize(Roles = "Admin")]
         public ActionResult Create()
@@ -103,12 +101,12 @@ namespace RVASIspit.Controllers
         [HttpPost]
         [Authorize(Roles = "Admin")]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Create([Bind(Include = "ProizvodID,Naziv,Cena,GrupaProizvodaID,VrstaProizvodaID")] Proizvod proizvod)
+        public ActionResult Create([Bind(Include = "ProizvodID,Naziv,Cena,GrupaProizvodaID,VrstaProizvodaID")] Proizvod proizvod)
         {
             if (ModelState.IsValid)
             {
                 db.Proizvodi.Add(proizvod);
-                await db.SaveChangesAsync();
+                db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
@@ -118,13 +116,13 @@ namespace RVASIspit.Controllers
         }
 
         [Authorize(Roles = "Admin")]
-        public async Task<ActionResult> Edit(int? id)
+        public ActionResult Edit(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Proizvod proizvod = await db.Proizvodi.FindAsync(id);
+            Proizvod proizvod = db.Proizvodi.Find(id);
             if (proizvod == null)
             {
                 return HttpNotFound();
@@ -137,12 +135,12 @@ namespace RVASIspit.Controllers
         [HttpPost]
         [Authorize(Roles = "Admin")]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Edit([Bind(Include = "ProizvodID,Naziv,Cena,GrupaProizvodaID,VrstaProizvodaID")] Proizvod proizvod)
+        public ActionResult Edit([Bind(Include = "ProizvodID,Naziv,Cena,GrupaProizvodaID,VrstaProizvodaID")] Proizvod proizvod)
         {
             if (ModelState.IsValid)
             {
                 db.Entry(proizvod).State = EntityState.Modified;
-                await db.SaveChangesAsync();
+                db.SaveChanges();
                 return RedirectToAction("Index");
             }
             ViewBag.GrupaProizvodaID = new SelectList(db.GrupeProizvoda, "GrupaProizvodaID", "NazivGrupe", proizvod.GrupaProizvodaID);
@@ -151,17 +149,17 @@ namespace RVASIspit.Controllers
         }
 
         [Authorize(Roles = "Admin")]
-        public async Task<ActionResult> Delete(int? id)
+        public ActionResult Delete(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
 
-            Proizvod proizvod = await db.Proizvodi
-                                        .Include(p => p.GrupaProizvoda)
-                                        .Include(p => p.VrstaProizvoda)
-                                        .FirstOrDefaultAsync(p => p.ProizvodID == id);
+            Proizvod proizvod = db.Proizvodi
+                                  .Include(p => p.GrupaProizvoda)
+                                  .Include(p => p.VrstaProizvoda)
+                                  .FirstOrDefault(p => p.ProizvodID == id);
 
             if (proizvod == null)
             {
@@ -174,11 +172,11 @@ namespace RVASIspit.Controllers
         [HttpPost, ActionName("Delete")]
         [Authorize(Roles = "Admin")]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> DeleteConfirmed(int id)
+        public ActionResult DeleteConfirmed(int id)
         {
-            Proizvod proizvod = await db.Proizvodi.FindAsync(id);
+            Proizvod proizvod = db.Proizvodi.Find(id);
             db.Proizvodi.Remove(proizvod);
-            await db.SaveChangesAsync();
+            db.SaveChanges();
             return RedirectToAction("Index");
         }
     }

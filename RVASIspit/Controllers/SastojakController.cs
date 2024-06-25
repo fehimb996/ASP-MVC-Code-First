@@ -18,14 +18,16 @@ namespace RVASIspit.Controllers
             db.Dispose();
         }
 
-        [Authorize(Roles = "Admin, Korisnik")] // Samo registrovani korisnici sa ulogama Admin ili Korisnik mogu da pristupe Index
+        // Samo registrovani korisnici sa ulogama Admin ili Korisnik mogu da pristupe Index
+        [Authorize(Roles = "Admin, Korisnik")] 
         public ActionResult Index()
         {
             var sastojci = db.Sastojci.ToList();
             return View(sastojci);
         }
 
-        [Authorize(Roles = "Admin, Korisnik")] // Samo registrovani korisnici sa ulogama Admin ili Korisnik mogu da pristupe Details
+        // Samo registrovani korisnici sa ulogama Admin ili Korisnik mogu da pristupe Details
+        [Authorize(Roles = "Admin, Korisnik")] 
         public ActionResult Details(int? id)
         {
             if (id == null)

@@ -18,7 +18,6 @@ namespace RVASIspit.Controllers
             db.Dispose();
         }
 
-        // GET: Zaposleni
         [Authorize(Roles = "Admin, Korisnik")]
         public ActionResult Index()
         {
@@ -32,7 +31,6 @@ namespace RVASIspit.Controllers
             }
         }
 
-        // GET: Zaposleni/Details/5
         public ActionResult Details(int? id)
         {
             if (id == null)
@@ -47,7 +45,6 @@ namespace RVASIspit.Controllers
             return View(zaposleni);
         }
 
-        // GET: Zaposleni/Create
         public ActionResult Create()
         {
             if (User.IsInRole("Admin") || User.IsInRole("Korisnik"))
@@ -56,11 +53,10 @@ namespace RVASIspit.Controllers
             }
             else
             {
-                return new HttpStatusCodeResult(HttpStatusCode.Forbidden); // Return 403 Forbidden for unauthorized users
+                return new HttpStatusCodeResult(HttpStatusCode.Forbidden);
             }
         }
 
-        // POST: Zaposleni/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "ZaposleniID,Ime,Prezime")] Zaposleni zaposleni)
@@ -77,11 +73,10 @@ namespace RVASIspit.Controllers
             }
             else
             {
-                return new HttpStatusCodeResult(HttpStatusCode.Forbidden); // Return 403 Forbidden for unauthorized users
+                return new HttpStatusCodeResult(HttpStatusCode.Forbidden);
             }
         }
 
-        // GET: Zaposleni/Edit/5
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -99,11 +94,10 @@ namespace RVASIspit.Controllers
             }
             else
             {
-                return new HttpStatusCodeResult(HttpStatusCode.Forbidden); // Return 403 Forbidden for unauthorized users
+                return new HttpStatusCodeResult(HttpStatusCode.Forbidden);
             }
         }
 
-        // POST: Zaposleni/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "ZaposleniID,Ime,Prezime")] Zaposleni zaposleni)
@@ -120,11 +114,10 @@ namespace RVASIspit.Controllers
             }
             else
             {
-                return new HttpStatusCodeResult(HttpStatusCode.Forbidden); // Return 403 Forbidden for unauthorized users
+                return new HttpStatusCodeResult(HttpStatusCode.Forbidden);
             }
         }
 
-        // GET: Zaposleni/Delete/5
         public ActionResult Delete(int? id)
         {
             if (id == null)
@@ -142,11 +135,10 @@ namespace RVASIspit.Controllers
             }
             else
             {
-                return new HttpStatusCodeResult(HttpStatusCode.Forbidden); // Return 403 Forbidden for unauthorized users
+                return new HttpStatusCodeResult(HttpStatusCode.Forbidden);
             }
         }
 
-        // POST: Zaposleni/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
@@ -160,7 +152,7 @@ namespace RVASIspit.Controllers
             }
             else
             {
-                return new HttpStatusCodeResult(HttpStatusCode.Forbidden); // Return 403 Forbidden for unauthorized users
+                return new HttpStatusCodeResult(HttpStatusCode.Forbidden);
             }
         }
     }

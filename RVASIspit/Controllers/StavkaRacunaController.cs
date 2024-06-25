@@ -79,7 +79,6 @@ namespace RVASIspit.Controllers
                 return HttpNotFound();
             }
 
-            // Prikupljanje potrebnih podataka za ViewBag
             ViewBag.ProizvodID = new SelectList(db.Proizvodi, "ProizvodID", "Naziv", stavkaRacuna.ProizvodID);
             ViewBag.RacunID = new SelectList(db.Racuni, "RacunID", "RacunID", stavkaRacuna.RacunID);
 
@@ -98,13 +97,11 @@ namespace RVASIspit.Controllers
                 return RedirectToAction("Index");
             }
 
-            // Ažuriranje ViewBag sa novim vrednostima u slučaju neuspešne validacije
             ViewBag.ProizvodID = new SelectList(db.Proizvodi, "ProizvodID", "Naziv", stavkaRacuna.ProizvodID);
             ViewBag.RacunID = new SelectList(db.Racuni, "RacunID", "RacunID", stavkaRacuna.RacunID);
 
             return View(stavkaRacuna);
         }
-
 
         [Authorize(Roles = "Admin")]
         public ActionResult Delete(int? racunID, int? proizvodID)

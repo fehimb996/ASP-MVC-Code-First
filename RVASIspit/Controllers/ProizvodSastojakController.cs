@@ -45,7 +45,7 @@ namespace RVASIspit.Controllers
         }
 
         // Samo admin može pristupiti CUD akcijama
-        [Authorize(Roles = "Admin")] // Samo admin može da pristupi Edit formi
+        [Authorize(Roles = "Admin")]
         public ActionResult Edit(int? proizvodId, int? sastojakId)
         {
             if (proizvodId == null || sastojakId == null)
