@@ -58,8 +58,8 @@ else
                         <a href="@Url.Action("Details", new { id = item.ProizvodID })" class="btn btn-primary">Detalji</a>
                         @if (User.IsInRole("Admin"))
                         {
-                            <a href="@Url.Action("Edit", new { id = item.ProizvodID })" class="btn btn-primary">Izmeni</a>
-                            <a href="@Url.Action("Delete", new { id = item.ProizvodID })" class="btn btn-primary">Obriši</a>
+                            <a href="@Url.Action("Edit", new { id = item.ProizvodID })" class="btn btn-warning">Izmeni</a>
+                            <a href="@Url.Action("Delete", new { id = item.ProizvodID })" class="btn btn-danger">Obriši</a>
                         }
                     </div>
                 </div>

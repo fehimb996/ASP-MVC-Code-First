@@ -30,9 +30,9 @@
                     @if (User.IsInRole("Admin") || User.IsInRole("Korisnik"))
                     {
                         <div class="btn-group" role="group">
-                            @Html.ActionLink("Details", "Details", new { id = item.ZaposleniID }, new { @class = "btn btn-primary" })
-                            @Html.ActionLink("Edit", "Edit", new { id = item.ZaposleniID }, new { @class = "btn btn-primary" })
-                            @Html.ActionLink("Delete", "Delete", new { id = item.ZaposleniID }, new { @class = "btn btn-primary" })
+                            @Html.ActionLink("Detalji", "Details", new { id = item.ZaposleniID }, new { @class = "btn btn-primary" })
+                            @Html.ActionLink("Izmeni", "Edit", new { id = item.ZaposleniID }, new { @class = "btn btn-warning" })
+                            @Html.ActionLink("Obriši", "Delete", new { id = item.ZaposleniID }, new { @class = "btn btn-danger" })
                         </div>
                     }
                 </div>

@@ -32,13 +32,13 @@
                         <div class="btn-group" role="group" aria-label="Akcije">
                             @if (User.IsInRole("Admin"))
                             {
-                                @Html.ActionLink("Edit", "Edit", new { proizvodId = item.ProizvodID, sastojakId = item.SastojakID }, new { @class = "btn btn-primary" })
-                                @Html.ActionLink("Details", "Details", new { proizvodId = item.ProizvodID, sastojakId = item.SastojakID }, new { @class = "btn btn-primary" })
-                                @Html.ActionLink("Delete", "Delete", new { proizvodId = item.ProizvodID, sastojakId = item.SastojakID }, new { @class = "btn btn-primary" })
+                                @Html.ActionLink("Detalji", "Details", new { proizvodId = item.ProizvodID, sastojakId = item.SastojakID }, new { @class = "btn btn-primary" })
+                                @Html.ActionLink("Izmeni", "Edit", new { proizvodId = item.ProizvodID, sastojakId = item.SastojakID }, new { @class = "btn btn-warning" })
+                                @Html.ActionLink("Obriši", "Delete", new { proizvodId = item.ProizvodID, sastojakId = item.SastojakID }, new { @class = "btn btn-danger" })
                             }
                             else if (User.IsInRole("Korisnik"))
                             {
-                                @Html.ActionLink("Details", "Details", new { proizvodId = item.ProizvodID, sastojakId = item.SastojakID }, new { @class = "btn btn-primary" })
+                                @Html.ActionLink("Detalji", "Details", new { proizvodId = item.ProizvodID, sastojakId = item.SastojakID }, new { @class = "btn btn-primary" })
                             }
                         </div>
                     </div>

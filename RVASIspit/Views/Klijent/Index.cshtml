@@ -52,13 +52,13 @@
                     <div class="btn-group" role="group" aria-label="Akcije">
                         @if (User.IsInRole("Admin"))
                         {
-                            @Html.ActionLink("Edit", "Edit", new { id = item.KlijentID }, new { @class = "btn btn-primary" })
-                            @Html.ActionLink("Details", "Details", new { id = item.KlijentID }, new { @class = "btn btn-primary" })
-                            @Html.ActionLink("Delete", "Delete", new { id = item.KlijentID }, new { @class = "btn btn-primary" })
+                            @Html.ActionLink("Detalji", "Details", new { id = item.KlijentID }, new { @class = "btn btn-primary" })
+                            @Html.ActionLink("Izmeni", "Edit", new { id = item.KlijentID }, new { @class = "btn btn-warning" })
+                            @Html.ActionLink("Obriši", "Delete", new { id = item.KlijentID }, new { @class = "btn btn-danger" })
                         }
                         else if (User.IsInRole("Korisnik"))
                         {
-                            @Html.ActionLink("Details", "Details", new { id = item.KlijentID }, new { @class = "btn btn-primary" })
+                            @Html.ActionLink("Detalji", "Details", new { id = item.KlijentID }, new { @class = "btn btn-primary" })
                         }
                     </div>
                 </td>
