@@ -95,7 +95,7 @@ namespace RVASIspit.Controllers
             db.Zaposleni.Add(zaposleni);
             db.SaveChanges();
 
-            return CreatedAtRoute("DefaultApi", new { id = zaposleni.ZaposleniID }, zaposleni);
+            return Created(new Uri(Request.RequestUri + "/" + zaposleni.ZaposleniID), zaposleni);
         }
 
         [Route("api/ZaposleniApi/{id:int}")]

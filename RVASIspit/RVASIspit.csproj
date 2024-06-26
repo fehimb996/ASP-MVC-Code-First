@@ -361,6 +361,7 @@
     <Content Include="Views\StavkaRacuna\Edit.cshtml" />
     <Content Include="Views\StavkaRacuna\Details.cshtml" />
     <Content Include="Views\StavkaRacuna\Delete.cshtml" />
+    <Content Include="Views\Zaposleni\Api.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -1,0 +1,93 @@
+﻿@{
+    ViewBag.Title = "API Zaposleni";
+}
+
+<h2>API Zaposleni</h2>
+
+<div>
+    <h3>Lista zaposlenih</h3>
+    <button id="loadEmployees">Učitaj zaposlene</button>
+    <ul id="employeeList"></ul>
+</div>
+
+<div>
+    <h3>Dodaj zaposlenog</h3>
+    <form id="addEmployeeForm">
+        <label for="Ime">Ime:</label>
+        <input type="text" id="Ime" name="Ime">
+        <label for="Prezime">Prezime:</label>
+        <input type="text" id="Prezime" name="Prezime">
+        <button type="submit">Dodaj</button>
+    </form>
+</div>
+
+<div>
+    <h3>Obriši zaposlenog</h3>
+    <form id="deleteEmployeeForm">
+        <label for="deleteId">ID:</label>
+        <input type="text" id="deleteId" name="deleteId">
+        <button type="submit">Obriši</button>
+    </form>
+</div>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script type="text/javascript">$(document).ready(function() {
+        $("#loadEmployees").click(function() {
+            $.ajax({
+                url: "/api/ZaposleniApi",
+                method: "GET",
+                success: function(data) {
+                    var employeeList = $("#employeeList");
+                    employeeList.empty();
+                    $.each(data, function(index, employee) {
+                        employeeList.append("<li>" + employee.Ime + " " + employee.Prezime + " (ID: " + employee.ZaposleniID + ")</li>");
+                    });
+                },
+                error: function() {
+                    alert("Greška prilikom učitavanja zaposlenih.");
+                }
+            });
+        });
+
+    $("#addEmployeeForm").submit(function (event) {
+        event.preventDefault();
+        var employee = {
+            Ime: $("#Ime").val(),
+            Prezime: $("#Prezime").val()
+        };
+        $.ajax({
+            url: "/api/ZaposleniApi",
+            method: "POST",
+            contentType: "application/json",
+            data: JSON.stringify(employee),
+            success: function () {
+                alert("Zaposleni uspešno dodat.");
+                $("#Ime").val("");
+                $("#Prezime").val("");
+                $("#loadEmployees").click();
+            },
+            error: function (jqXHR, textStatus, errorThrown) {
+                alert("Greška prilikom dodavanja zaposlenog.");
+                console.log("Error details:", jqXHR, textStatus, errorThrown);
+            }
+        });
+    });
+
+
+        $("#deleteEmployeeForm").submit(function(event) {
+            event.preventDefault();
+            var id = $("#deleteId").val();
+            $.ajax({
+                url: "/api/ZaposleniApi/" + id,
+                method: "DELETE",
+                success: function() {
+                    alert("Zaposleni uspešno obrisan.");
+                    $("#deleteId").val("");
+                    $("#loadEmployees").click();
+                },
+                error: function() {
+                    alert("Greška prilikom brisanja zaposlenog.");
+                }
+            });
+        });
+    });</script>

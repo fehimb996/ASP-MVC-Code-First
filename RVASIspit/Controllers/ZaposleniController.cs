@@ -155,5 +155,10 @@ namespace RVASIspit.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.Forbidden);
             }
         }
+
+        public ActionResult Api()
+        {
+            return View();
+        }
     }
 }
