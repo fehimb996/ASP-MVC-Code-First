@@ -64,7 +64,7 @@ namespace RVASIspit.Controllers
                     break;
             }
 
-            int pageSize = 10;
+            int pageSize = 12;
             int pageNumber = (page ?? 1);
 
             var grupeProizvoda = db.GrupeProizvoda.ToList();

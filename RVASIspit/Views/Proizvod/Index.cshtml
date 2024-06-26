@@ -68,7 +68,7 @@ else
     </div>
 }
 
-<div class="pagination-container text-center">
+<div class="pagination-container">
     <div>
         Stranica @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) od @Model.PageCount
     </div>
@@ -90,3 +90,11 @@ else
         })
     </div>
 </div>
+
+<style>
+    .pagination-container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+</style>
